@@ -1,0 +1,410 @@
+# ============================================================
+# Design Squad — config.yaml
+# O cerebro de roteamento do squad de design.
+# Linguagem mista: chaves em English, descricoes em PT-BR.
+# ============================================================
+
+squad:
+  name: design-squad
+  version: "1.0.0"
+  description: >
+    Squad responsavel por todas as disciplinas de design:
+    discovery, UX, UI, design system, prototyping, handoff,
+    QA visual e governanca de design.
+  chief_agent: design-chief
+  lang: pt-BR
+  created: "2026-03-06"
+
+# ------------------------------------------------------------
+# Principles
+# ------------------------------------------------------------
+principles:
+  - evidence_over_opinion
+  - system_first
+  - accessibility_by_default
+  - ship_learn_iterate
+  - docs_as_truth
+
+# ------------------------------------------------------------
+# Routing — cada task mapeia agents, frameworks, checklists,
+# templates e registries.
+# ------------------------------------------------------------
+routing:
+
+  # === DISCOVERY ===
+
+  problem-definition:
+    agents: [design-chief, ux-design-expert, dave-malouf]
+    frameworks: [discovery-brief-framework]
+    checklists: [problem-definition-checklist]
+    templates: [problem-brief-template]
+    registry: [discovery-registry]
+
+  competitive-ui-audit:
+    agents: [jessica-ux-ui, ux-design-expert]
+    frameworks: [competitive-audit-framework]
+    checklists: [competitive-audit-checklist]
+    templates: [competitive-audit-template]
+    registry: [audit-registry]
+
+  design-audit-existing-product:
+    agents: [design-chief, jessica-ux-ui, brad-frost]
+    frameworks: [design-audit-framework]
+    checklists: [design-audit-checklist]
+    templates: [design-audit-template]
+    registry: [audit-registry]
+
+  # === RESEARCH ===
+
+  plan-and-run-interviews:
+    agents: [ux-design-expert, dave-malouf]
+    frameworks: [interview-framework]
+    checklists: [interview-checklist]
+    templates: [interview-guide-template, interview-notes-template]
+    registry: [research-registry]
+
+  run-usability-test:
+    agents: [ux-design-expert, jessica-ux-ui]
+    frameworks: [usability-test-framework]
+    checklists: [usability-test-checklist]
+    templates: [usability-test-plan-template, usability-report-template]
+    registry: [research-registry]
+
+  run-card-sort:
+    agents: [ux-design-expert]
+    frameworks: [card-sort-framework]
+    checklists: [card-sort-checklist]
+    templates: [card-sort-template]
+    registry: [research-registry]
+
+  synthesize-insights:
+    agents: [ux-design-expert, design-chief]
+    frameworks: [insight-synthesis-framework]
+    checklists: [synthesis-checklist]
+    templates: [insight-report-template]
+    registry: [research-registry]
+
+  # === INFORMATION ARCHITECTURE ===
+
+  build-ia-and-sitemap:
+    agents: [ux-design-expert, jessica-ux-ui]
+    frameworks: [ia-framework]
+    checklists: [ia-checklist]
+    templates: [sitemap-template, ia-diagram-template]
+    registry: [ia-registry]
+
+  design-user-flows:
+    agents: [ux-design-expert, jessica-ux-ui]
+    frameworks: [ux-flow-framework]
+    checklists: [user-flow-checklist]
+    templates: [user-flow-template]
+    registry: [ia-registry]
+
+  create-personas-or-jtbd:
+    agents: [ux-design-expert, dave-malouf]
+    frameworks: [strategy-canvas-framework]
+    checklists: [persona-jtbd-checklist]
+    templates: [persona-template, jtbd-template]
+    registry: [research-registry]
+
+  create-journey-map:
+    agents: [ux-design-expert, jessica-ux-ui]
+    frameworks: [journey-map-framework]
+    checklists: [journey-map-checklist]
+    templates: [journey-map-template]
+    registry: [research-registry]
+
+  # === UX DESIGN ===
+
+  wireframe-pack:
+    agents: [jessica-ux-ui, ux-design-expert]
+    frameworks: [ux-flow-framework]
+    checklists: [wireframe-checklist]
+    templates: [wireframe-pack-template]
+    registry: [design-artifact-registry]
+
+  # === UI DESIGN ===
+
+  ui-design-high-fidelity:
+    agents: [jessica-ux-ui, design-system-architect]
+    frameworks: [ui-visual-framework]
+    checklists: [ui-hifi-checklist]
+    templates: [ui-spec-template]
+    registry: [design-artifact-registry]
+
+  build-prototype:
+    agents: [jessica-ux-ui, ux-design-expert]
+    frameworks: [prototyping-test-framework]
+    checklists: [prototype-checklist]
+    templates: [prototype-spec-template]
+    registry: [design-artifact-registry]
+
+  design-motion-specs:
+    agents: [jessica-ux-ui, design-system-architect]
+    frameworks: [motion-spec-framework]
+    checklists: [motion-spec-checklist]
+    templates: [motion-spec-template]
+    registry: [design-artifact-registry]
+
+  content-design-microcopy:
+    agents: [ux-design-expert, jessica-ux-ui]
+    frameworks: [content-design-framework]
+    checklists: [microcopy-checklist]
+    templates: [microcopy-template]
+    registry: [content-registry]
+
+  create-visual-explorations:
+    agents: [nano-banana-generator, jessica-ux-ui]
+    frameworks: [visual-exploration-framework]
+    checklists: [visual-exploration-checklist]
+    templates: [moodboard-template, style-tile-template]
+    registry: [design-artifact-registry]
+
+  # === DESIGN SYSTEM ===
+
+  design-system-bootstrap:
+    agents: [design-system-architect, brad-frost, dan-mall]
+    frameworks: [design-system-framework]
+    checklists: [ds-bootstrap-checklist]
+    templates: [ds-bootstrap-template]
+    registry: [design-system-registry]
+
+  create-component-spec:
+    agents: [design-system-architect, brad-frost]
+    frameworks: [design-system-framework]
+    checklists: [component-spec-checklist]
+    templates: [component-spec-template]
+    registry: [design-system-registry]
+
+  create-or-update-tokens:
+    agents: [design-system-architect, brad-frost]
+    frameworks: [token-management-framework]
+    checklists: [token-checklist]
+    templates: [token-spec-template]
+    registry: [token-registry]
+
+  publish-library:
+    agents: [design-system-architect, design-chief]
+    frameworks: [library-publish-framework]
+    checklists: [library-publish-checklist]
+    templates: [release-notes-template]
+    registry: [design-system-registry]
+
+  ds-health-check:
+    agents: [design-system-architect, brad-frost, dan-mall]
+    frameworks: [ds-health-framework]
+    checklists: [ds-health-checklist]
+    templates: [ds-health-report-template]
+    registry: [design-system-registry]
+
+  # === ACCESSIBILITY ===
+
+  a11y-audit:
+    agents: [ux-design-expert, design-system-architect]
+    frameworks: [a11y-audit-framework]
+    checklists: [a11y-audit-checklist]
+    templates: [a11y-report-template]
+    registry: [a11y-registry]
+
+  remediate-and-verify:
+    agents: [jessica-ux-ui, design-system-architect]
+    frameworks: [a11y-remediation-framework]
+    checklists: [a11y-remediation-checklist]
+    templates: [a11y-remediation-template]
+    registry: [a11y-registry]
+
+  # === HANDOFF & QA ===
+
+  dev-handoff:
+    agents: [jessica-ux-ui, design-system-architect, design-chief]
+    frameworks: [handoff-spec-framework]
+    checklists: [handoff-checklist]
+    templates: [handoff-package-template]
+    registry: [handoff-registry]
+
+  qa-with-engineering:
+    agents: [design-chief, jessica-ux-ui]
+    frameworks: [qa-review-framework]
+    checklists: [qa-visual-checklist]
+    templates: [qa-report-template]
+    registry: [qa-registry]
+
+  # === GOVERNANCE ===
+
+  post-release-review:
+    agents: [design-chief, ux-design-expert, dan-mall]
+    frameworks: [governance-ops-framework]
+    checklists: [post-release-checklist]
+    templates: [post-release-report-template]
+    registry: [governance-registry]
+
+  design-critique-session:
+    agents: [design-chief, dan-mall, dave-malouf]
+    frameworks: [design-critique-framework]
+    checklists: [critique-checklist]
+    templates: [critique-session-template]
+    registry: [governance-registry]
+
+  quarterly-design-review:
+    agents: [design-chief, dan-mall, dave-malouf, brad-frost]
+    frameworks: [governance-ops-framework]
+    checklists: [quarterly-review-checklist]
+    templates: [quarterly-review-template]
+    registry: [governance-registry]
+
+  design-debt-prioritization:
+    agents: [design-chief, design-system-architect, dan-mall]
+    frameworks: [design-debt-framework]
+    checklists: [design-debt-checklist]
+    templates: [design-debt-backlog-template]
+    registry: [governance-registry]
+
+# ------------------------------------------------------------
+# Cross-Squad Integration
+# ------------------------------------------------------------
+cross_squad:
+
+  copy_squad:
+    handoff_to_design:
+      - tom-de-voz-guidelines
+      - glossario-de-produto
+      - microcopy-aprovado
+    handoff_from_design:
+      - contexto-de-tela
+      - fluxo-do-usuario
+      - wireframe-com-placeholder
+    shared_assets:
+      - brand-voice-tokens
+      - content-patterns
+
+  brand_squad:
+    handoff_to_design:
+      - brand-guidelines
+      - paleta-de-cores
+      - tipografia-aprovada
+      - iconografia-base
+    handoff_from_design:
+      - aplicacoes-de-marca-em-produto
+      - extensoes-de-paleta-para-ui
+      - proposta-de-novos-icones
+    shared_assets:
+      - color-tokens
+      - typography-tokens
+      - logo-assets
+
+  traffic_squad:
+    handoff_to_design:
+      - dados-de-comportamento
+      - funis-de-conversao
+      - heatmaps
+      - metricas-de-engajamento
+    handoff_from_design:
+      - hipoteses-de-design
+      - variantes-para-ab-test
+      - tracking-requirements
+    shared_assets:
+      - event-taxonomy
+      - funnel-definitions
+
+  storytelling_squad:
+    handoff_to_design:
+      - narrativa-de-produto
+      - scripts-de-onboarding
+      - arcos-de-experiencia
+    handoff_from_design:
+      - storyboard-visual
+      - prototipos-de-narrativa
+      - assets-para-case-study
+    shared_assets:
+      - illustration-library
+      - animation-assets
+
+# ------------------------------------------------------------
+# Quality Gates
+# ------------------------------------------------------------
+quality_gates:
+
+  mandatory:
+    - gate: discovery-brief-quality
+      description: >
+        Todo projeto deve ter um brief de discovery validado
+        antes de avancar para qualquer fase de design.
+      blocking: true
+
+    - gate: accessibility-quality
+      description: >
+        Auditoria de acessibilidade WCAG 2.1 AA obrigatoria.
+        Violacoes criticas bloqueiam release.
+      blocking: true
+
+    - gate: handoff-quality
+      description: >
+        Pacote de handoff deve conter specs completas,
+        tokens mapeados e assets exportados.
+      blocking: true
+
+  per_domain:
+    - gate: component-spec-quality
+      applies_to: [design-system-bootstrap, create-component-spec, create-or-update-tokens]
+      description: Componentes devem ter spec completa antes de publicacao.
+
+    - gate: usability-test-quality
+      applies_to: [build-prototype, run-usability-test]
+      description: Prototipos testados devem ter relatorio de findings.
+
+    - gate: metrics-review-quality
+      applies_to: [post-release-review, quarterly-design-review]
+      description: Reviews devem incluir dados quantitativos validados.
+
+# ------------------------------------------------------------
+# KPIs
+# ------------------------------------------------------------
+kpis:
+
+  user_experience:
+    - task_success_rate
+    - time_on_task
+    - error_rate
+    - satisfaction_score_sus
+    - net_promoter_score
+
+  heart_metrics:
+    - happiness
+    - engagement
+    - adoption
+    - retention
+    - task_success
+
+  design_system:
+    - component_coverage
+    - token_adoption_rate
+    - library_version_drift
+    - component_reuse_ratio
+    - documentation_completeness
+
+  accessibility:
+    - wcag_compliance_score
+    - critical_violations_count
+    - remediation_time_avg
+    - screen_reader_pass_rate
+    - color_contrast_pass_rate
+
+  operational:
+    - cycle_time_discovery_to_handoff
+    - design_debt_ratio
+    - review_turnaround_time
+    - rework_rate
+    - squad_throughput
+
+# ------------------------------------------------------------
+# Defaults
+# ------------------------------------------------------------
+defaults:
+  review_agent: design-chief
+  min_checklists: 1
+  registry_on_completion: true
+  output_format: markdown
+  a11y_standard: "WCAG 2.1 AA"
+  token_format: style-dictionary
+  prototype_tool: figma
+  handoff_model: token-based
