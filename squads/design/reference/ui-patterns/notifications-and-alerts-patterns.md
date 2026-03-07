@@ -16,6 +16,8 @@ Notifications e alerts sao como o sistema se comunica com o usuario — desde fe
 
 
 
+
+
 ## Key Concepts
 
 

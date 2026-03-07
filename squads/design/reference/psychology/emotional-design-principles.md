@@ -16,6 +16,8 @@ Emotional design reconhece que usuarios nao sao processadores logicos de informa
 
 
 
+
+
 ## Key Concepts
 
 

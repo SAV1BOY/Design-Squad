@@ -16,6 +16,8 @@ Atencao e percepcao determinam o que o usuario ve, processa e ignora em uma inte
 
 
 
+
+
 ## Key Concepts
 
 

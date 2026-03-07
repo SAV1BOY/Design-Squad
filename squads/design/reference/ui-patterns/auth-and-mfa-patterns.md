@@ -16,6 +16,8 @@ Patterns de autenticacao e MFA (Multi-Factor Authentication) equilibram seguranc
 
 
 
+
+
 ## Key Concepts
 
 

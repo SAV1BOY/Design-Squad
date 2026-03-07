@@ -16,6 +16,8 @@ Patterns de busca e filtragem permitem que usuarios encontrem o que precisam em 
 
 
 
+
+
 ## Key Concepts
 
 

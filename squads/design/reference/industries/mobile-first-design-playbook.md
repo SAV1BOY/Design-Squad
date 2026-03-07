@@ -16,6 +16,8 @@ Mobile-first design e a abordagem de projetar primeiramente para a menor tela e 
 
 
 
+
+
 ## Key Concepts
 
 

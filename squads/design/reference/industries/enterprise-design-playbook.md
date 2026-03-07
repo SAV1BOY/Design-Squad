@@ -16,6 +16,8 @@ Enterprise design atende organizacoes como clientes — decisao de compra e cole
 
 
 
+
+
 ## Key Concepts
 
 

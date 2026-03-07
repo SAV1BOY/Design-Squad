@@ -16,6 +16,8 @@ A Peak-End Rule, identificada por Kahneman, afirma que a memoria de uma experien
 
 
 
+
+
 ## Key Concepts
 
 

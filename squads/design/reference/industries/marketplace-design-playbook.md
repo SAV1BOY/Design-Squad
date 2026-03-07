@@ -16,6 +16,8 @@ Marketplaces sao plataformas de dois lados que conectam oferta (sellers/provider
 
 
 
+
+
 ## Key Concepts
 
 

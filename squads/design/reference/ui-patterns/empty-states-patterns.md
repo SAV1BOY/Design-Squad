@@ -16,6 +16,8 @@ Empty states sao telas ou secoes sem conteudo — seja porque o usuario e novo (
 
 
 
+
+
 ## Key Concepts
 
 

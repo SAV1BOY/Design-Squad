@@ -16,6 +16,8 @@ Cor e um dos elementos mais poderosos de comunicacao visual — transmite emocao
 
 
 
+
+
 ## Key Concepts
 
 

@@ -16,6 +16,8 @@ Fintech design opera na intersecao de usabilidade, seguranca e regulamentacao. D
 
 
 
+
+
 ## Key Concepts
 
 

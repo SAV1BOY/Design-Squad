@@ -16,6 +16,8 @@ E-commerce design e otimizacao de conversao em cada etapa do funil: discovery (e
 
 
 
+
+
 ## Key Concepts
 
 

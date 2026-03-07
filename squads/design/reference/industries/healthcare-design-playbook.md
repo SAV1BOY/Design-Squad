@@ -16,6 +16,8 @@ Healthcare design opera sob restricoes unicas: regulamentacao rigorosa (HIPAA, L
 
 
 
+
+
 ## Key Concepts
 
 

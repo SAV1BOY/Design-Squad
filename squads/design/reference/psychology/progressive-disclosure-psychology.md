@@ -16,6 +16,8 @@ Progressive disclosure e a estrategia de apresentar informacao em camadas, revel
 
 
 
+
+
 ## Key Concepts
 
 

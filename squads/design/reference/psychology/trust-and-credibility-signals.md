@@ -16,6 +16,8 @@ Trust signals sao elementos de design que comunicam credibilidade e seguranca, r
 
 
 
+
+
 ## Key Concepts
 
 

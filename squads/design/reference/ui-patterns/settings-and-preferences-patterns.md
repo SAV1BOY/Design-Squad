@@ -16,6 +16,8 @@ Settings e preferences permitem que usuarios personalizem a experiencia do produ
 
 
 
+
+
 ## Key Concepts
 
 

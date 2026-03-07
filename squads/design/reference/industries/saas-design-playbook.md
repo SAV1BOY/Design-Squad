@@ -16,6 +16,8 @@ Software as a Service (SaaS) tem desafios de design especificos: onboarding que 
 
 
 
+
+
 ## Key Concepts
 
 

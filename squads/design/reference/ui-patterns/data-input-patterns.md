@@ -16,6 +16,8 @@ Data input patterns definem como cada tipo de dado e coletado do usuario — qua
 
 
 
+
+
 ## Key Concepts
 
 

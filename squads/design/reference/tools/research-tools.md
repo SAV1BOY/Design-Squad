@@ -16,6 +16,8 @@ Research tools suportam todo o ciclo de pesquisa de usuario: recrutamento de par
 
 
 
+
+
 ## Key Concepts
 
 

@@ -16,6 +16,8 @@ Plataformas de media e conteudo (streaming, news, blogs, podcasts) tem desafios 
 
 
 
+
+
 ## Key Concepts
 
 

@@ -16,6 +16,8 @@ Feedback loops sao ciclos de acao-resultado-ajuste que permitem ao usuario (e ao
 
 
 
+
+
 ## Key Concepts
 
 
