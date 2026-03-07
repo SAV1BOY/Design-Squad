@@ -1,0 +1,56 @@
+# Tokens Registry
+# Catalogo de design tokens com camada, categoria, valor e status.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # token ID (kebab-case)
+  - layer: enum         # global | alias | component
+  - category: enum      # color | typography | spacing | elevation | radius | motion
+  - value_light: string # Valor no tema light
+  - value_dark: string  # Valor no tema dark
+  - status: enum        # active | deprecated
+  - deprecated_by: string # Token substituto (se deprecated)
+  - usage_count: int    # Numero de usos no codebase
+
+entries:
+  - id: "color-blue-600"
+    layer: "global"
+    category: "color"
+    value_light: "#2563EB"
+    value_dark: "#3B82F6"
+    status: "active"
+    usage_count: 0
+
+  - id: "color-action-primary"
+    layer: "alias"
+    category: "color"
+    value_light: "{color-blue-600}"
+    value_dark: "{color-blue-500}"
+    status: "active"
+    usage_count: 47
+
+  - id: "spacing-md"
+    layer: "global"
+    category: "spacing"
+    value_light: "16px"
+    value_dark: "16px"
+    status: "active"
+    usage_count: 128
+
+  - id: "button-bg-primary"
+    layer: "component"
+    category: "color"
+    value_light: "{color-action-primary}"
+    value_dark: "{color-action-primary}"
+    status: "active"
+    usage_count: 12
+
+  - id: "elevation-lg"
+    layer: "global"
+    category: "elevation"
+    value_light: "0 8px 16px -4px rgba(0,0,0,0.16)"
+    value_dark: "0 8px 16px -4px rgba(0,0,0,0.4)"
+    status: "active"
+    usage_count: 8

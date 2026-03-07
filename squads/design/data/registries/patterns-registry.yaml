@@ -1,0 +1,59 @@
+# Patterns Registry
+# Catalogo de padroes de UX documentados com status e contexto de uso.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # pat-001
+  - name: string        # Nome do padrao
+  - category: enum      # data-entry | navigation | content | communication | data-management | layout
+  - status: enum        # documented | validated | deprecated
+  - contexts: list      # Contextos onde se aplica
+  - components_used: list # Componentes que o padrao utiliza
+  - doc_url: string     # Link para documentacao completa
+  - last_validated: date
+
+entries:
+  - id: "pat-001"
+    name: "Inline Form Validation"
+    category: "data-entry"
+    status: "validated"
+    contexts:
+      - "Formularios de cadastro"
+      - "Checkout"
+      - "Settings forms"
+    components_used:
+      - "comp-input"
+      - "comp-button"
+    doc_url: "/lib/patterns/error-message-patterns.md"
+    last_validated: "2026-02-10"
+
+  - id: "pat-002"
+    name: "Empty State with CTA"
+    category: "content"
+    status: "validated"
+    contexts:
+      - "First-use de qualquer lista"
+      - "Resultados de busca vazios"
+      - "Permissao negada"
+    components_used:
+      - "comp-button"
+      - "comp-empty-state"
+    doc_url: "/lib/patterns/empty-state-patterns.md"
+    last_validated: "2026-02-15"
+
+  - id: "pat-003"
+    name: "Table with Sort and Filter"
+    category: "data-management"
+    status: "documented"
+    contexts:
+      - "Dashboards administrativos"
+      - "Listagens de dados"
+    components_used:
+      - "comp-table"
+      - "comp-input"
+      - "comp-select"
+      - "comp-chip"
+    doc_url: "/lib/patterns/table-filter-patterns.md"
+    last_validated: "2026-01-28"

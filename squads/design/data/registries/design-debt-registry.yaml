@@ -1,0 +1,51 @@
+# Design Debt Registry
+# Registro de debito de design — inconsistencias, workarounds e melhorias adiadas.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # DEBT-001
+  - title: string       # Descricao da divida
+  - category: enum      # consistency | a11y | performance | pattern | token
+  - severity: enum      # critical | high | medium | low
+  - impact: string      # Impacto no usuario ou time
+  - effort: enum        # small (< 1d) | medium (1-3d) | large (3d+)
+  - status: enum        # identified | planned | in-progress | resolved
+  - created_date: date
+  - target_date: date
+  - owner: string
+
+entries:
+  - id: "DEBT-001"
+    title: "Botoes com 3 variantes de border-radius nao padronizadas"
+    category: "consistency"
+    severity: "medium"
+    impact: "Inconsistencia visual entre paginas"
+    effort: "small"
+    status: "planned"
+    created_date: "2026-01-10"
+    target_date: "2026-03-30"
+    owner: "ana.silva"
+
+  - id: "DEBT-002"
+    title: "Forms sem validacao inline — apenas on submit"
+    category: "pattern"
+    severity: "high"
+    impact: "Experiencia de preenchimento frustrante para usuarios"
+    effort: "medium"
+    status: "in-progress"
+    created_date: "2026-01-25"
+    target_date: "2026-03-15"
+    owner: "maria.santos"
+
+  - id: "DEBT-003"
+    title: "Dark mode com 12 cores hard-coded nao tokenizadas"
+    category: "token"
+    severity: "high"
+    impact: "Manutencao de temas complexa e propensa a erros"
+    effort: "large"
+    status: "identified"
+    created_date: "2026-02-05"
+    target_date: null
+    owner: null

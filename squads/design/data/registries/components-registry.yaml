@@ -1,0 +1,70 @@
+# Components Registry
+# Catalogo de componentes do design system com status, versao e ownership.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string            # comp-button
+  - name: string          # Button
+  - category: enum        # actions | inputs | navigation | data-display | feedback | layout
+  - status: enum          # draft | beta | stable | deprecated
+  - version: string       # 2.1.0
+  - figma_url: string     # Link para Figma component
+  - storybook_url: string # Link para Storybook
+  - owner: string         # Designer responsavel
+  - a11y_reviewed: bool   # Revisado para acessibilidade
+  - tokens_used: list     # Tokens consumidos
+  - last_audit: date      # Ultima auditoria de qualidade
+
+entries:
+  - id: "comp-button"
+    name: "Button"
+    category: "actions"
+    status: "stable"
+    version: "2.1.0"
+    figma_url: "https://figma.com/file/xxx/button"
+    storybook_url: "https://storybook.ds.com/?path=/docs/button"
+    owner: "ana.silva"
+    a11y_reviewed: true
+    tokens_used:
+      - "color-action-primary"
+      - "color-text-on-action"
+      - "spacing-sm"
+      - "spacing-md"
+      - "radius-md"
+      - "font-button"
+    last_audit: "2026-02-15"
+
+  - id: "comp-input"
+    name: "Text Input"
+    category: "inputs"
+    status: "stable"
+    version: "1.4.0"
+    figma_url: "https://figma.com/file/xxx/input"
+    storybook_url: "https://storybook.ds.com/?path=/docs/input"
+    owner: "maria.santos"
+    a11y_reviewed: true
+    tokens_used:
+      - "color-border-default"
+      - "color-border-focus"
+      - "color-feedback-error"
+      - "spacing-sm"
+      - "radius-sm"
+    last_audit: "2026-02-20"
+
+  - id: "comp-modal"
+    name: "Modal / Dialog"
+    category: "feedback"
+    status: "beta"
+    version: "0.9.0"
+    figma_url: "https://figma.com/file/xxx/modal"
+    storybook_url: "https://storybook.ds.com/?path=/docs/modal"
+    owner: "carlos.lima"
+    a11y_reviewed: false
+    tokens_used:
+      - "color-surface-overlay"
+      - "elevation-lg"
+      - "spacing-lg"
+      - "radius-lg"
+    last_audit: "2026-01-30"

@@ -1,0 +1,95 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "description": "Global (primitive) design tokens — valores base que alimentam alias tokens.",
+  "color": {
+    "blue": {
+      "50":  { "value": "#EFF6FF", "type": "color" },
+      "100": { "value": "#DBEAFE", "type": "color" },
+      "200": { "value": "#BFDBFE", "type": "color" },
+      "300": { "value": "#93C5FD", "type": "color" },
+      "400": { "value": "#60A5FA", "type": "color" },
+      "500": { "value": "#3B82F6", "type": "color" },
+      "600": { "value": "#2563EB", "type": "color" },
+      "700": { "value": "#1D4ED8", "type": "color" },
+      "800": { "value": "#1E40AF", "type": "color" },
+      "900": { "value": "#1E3A8A", "type": "color" }
+    },
+    "gray": {
+      "50":  { "value": "#F9FAFB", "type": "color" },
+      "100": { "value": "#F3F4F6", "type": "color" },
+      "200": { "value": "#E5E7EB", "type": "color" },
+      "300": { "value": "#D1D5DB", "type": "color" },
+      "400": { "value": "#9CA3AF", "type": "color" },
+      "500": { "value": "#6B7280", "type": "color" },
+      "600": { "value": "#4B5563", "type": "color" },
+      "700": { "value": "#374151", "type": "color" },
+      "800": { "value": "#1F2937", "type": "color" },
+      "900": { "value": "#111827", "type": "color" }
+    },
+    "red": {
+      "50":  { "value": "#FEF2F2", "type": "color" },
+      "500": { "value": "#EF4444", "type": "color" },
+      "600": { "value": "#DC2626", "type": "color" },
+      "700": { "value": "#B91C1C", "type": "color" }
+    },
+    "green": {
+      "50":  { "value": "#F0FDF4", "type": "color" },
+      "500": { "value": "#22C55E", "type": "color" },
+      "600": { "value": "#16A34A", "type": "color" },
+      "700": { "value": "#15803D", "type": "color" }
+    },
+    "yellow": {
+      "50":  { "value": "#FEFCE8", "type": "color" },
+      "500": { "value": "#EAB308", "type": "color" },
+      "600": { "value": "#CA8A04", "type": "color" },
+      "800": { "value": "#854D0E", "type": "color" }
+    }
+  },
+  "spacing": {
+    "none":  { "value": "0",    "type": "spacing" },
+    "3xs":   { "value": "1px",  "type": "spacing" },
+    "2xs":   { "value": "2px",  "type": "spacing" },
+    "xs":    { "value": "4px",  "type": "spacing" },
+    "sm":    { "value": "8px",  "type": "spacing" },
+    "md":    { "value": "16px", "type": "spacing" },
+    "lg":    { "value": "24px", "type": "spacing" },
+    "xl":    { "value": "32px", "type": "spacing" },
+    "2xl":   { "value": "48px", "type": "spacing" },
+    "3xl":   { "value": "64px", "type": "spacing" },
+    "4xl":   { "value": "96px", "type": "spacing" }
+  },
+  "fontSize": {
+    "xs":  { "value": "11px", "type": "fontSize" },
+    "sm":  { "value": "13px", "type": "fontSize" },
+    "md":  { "value": "15px", "type": "fontSize" },
+    "lg":  { "value": "17px", "type": "fontSize" },
+    "xl":  { "value": "20px", "type": "fontSize" },
+    "2xl": { "value": "24px", "type": "fontSize" },
+    "3xl": { "value": "32px", "type": "fontSize" },
+    "4xl": { "value": "40px", "type": "fontSize" },
+    "5xl": { "value": "48px", "type": "fontSize" },
+    "6xl": { "value": "64px", "type": "fontSize" }
+  },
+  "fontWeight": {
+    "regular":  { "value": "400", "type": "fontWeight" },
+    "medium":   { "value": "500", "type": "fontWeight" },
+    "semibold": { "value": "600", "type": "fontWeight" },
+    "bold":     { "value": "700", "type": "fontWeight" },
+    "extrabold":{ "value": "800", "type": "fontWeight" }
+  },
+  "borderRadius": {
+    "none": { "value": "0",      "type": "borderRadius" },
+    "sm":   { "value": "4px",    "type": "borderRadius" },
+    "md":   { "value": "8px",    "type": "borderRadius" },
+    "lg":   { "value": "12px",   "type": "borderRadius" },
+    "xl":   { "value": "16px",   "type": "borderRadius" },
+    "full": { "value": "9999px", "type": "borderRadius" }
+  },
+  "duration": {
+    "instant": { "value": "0ms",   "type": "duration" },
+    "fast":    { "value": "100ms", "type": "duration" },
+    "normal":  { "value": "200ms", "type": "duration" },
+    "slow":    { "value": "300ms", "type": "duration" },
+    "slower":  { "value": "500ms", "type": "duration" }
+  }
+}

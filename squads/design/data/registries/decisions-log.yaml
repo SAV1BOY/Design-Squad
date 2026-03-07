@@ -1,0 +1,63 @@
+# Design Decisions Log
+# Registro de decisoes de design significativas com contexto, alternativas e resultados.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # DEC-001
+  - date: date          # Data da decisao
+  - title: string       # Titulo descritivo
+  - context: string     # Contexto e problema
+  - options: list       # Alternativas consideradas
+  - decision: string    # Opcao escolhida
+  - rationale: string   # Justificativa
+  - consequences: list  # Consequencias esperadas
+  - status: enum        # proposed | accepted | deprecated | superseded
+  - owner: string       # Responsavel pela decisao
+  - related: list       # IDs de decisoes relacionadas
+
+entries:
+  - id: "DEC-001"
+    date: "2026-01-15"
+    title: "Adocao de design tokens em CSS Custom Properties"
+    context: >
+      Necessidade de padronizar valores visuais e suportar temas
+      (light/dark) no design system.
+    options:
+      - "SASS variables com build-time theming"
+      - "CSS Custom Properties com runtime theming"
+      - "CSS-in-JS com styled-components"
+    decision: "CSS Custom Properties com runtime theming"
+    rationale: >
+      CSS Custom Properties permitem theming em runtime sem rebuild,
+      funcionam com qualquer framework e tem suporte nativo nos browsers.
+    consequences:
+      - "Theming em runtime sem JS adicional"
+      - "Fallback necessario para IE11 (se aplicavel)"
+      - "Tooling de lint para validar uso de tokens"
+    status: "accepted"
+    owner: "ana.silva"
+    related: []
+
+  - id: "DEC-002"
+    date: "2026-02-01"
+    title: "Padrao de nomenclatura de tokens em 3 camadas"
+    context: >
+      Definir convencao de nomes para tokens que escale com o
+      crescimento do design system.
+    options:
+      - "Flat naming (color-blue-500)"
+      - "Two-tier (primitive + semantic)"
+      - "Three-tier (global + alias + component)"
+    decision: "Three-tier (global + alias + component)"
+    rationale: >
+      Tres camadas permitem reutilizacao maxima, facilitam theming
+      e isolam mudancas de impacto nos componentes.
+    consequences:
+      - "Maior complexidade inicial de setup"
+      - "Necessidade de documentacao clara das camadas"
+      - "Melhor manutencao a longo prazo"
+    status: "accepted"
+    owner: "carlos.lima"
+    related: ["DEC-001"]

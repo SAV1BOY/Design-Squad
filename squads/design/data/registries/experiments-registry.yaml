@@ -1,0 +1,56 @@
+# Experiments Registry
+# Registro de experimentos de design (A/B tests, feature flags, prototipos testados).
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # EXP-001
+  - title: string       # Titulo do experimento
+  - hypothesis: string  # Hipotese testada
+  - metric: string      # Metrica primaria
+  - variant_a: string   # Descricao do controle
+  - variant_b: string   # Descricao do tratamento
+  - start_date: date
+  - end_date: date
+  - sample_size: int
+  - result: enum        # winner-a | winner-b | inconclusive | stopped
+  - confidence: float   # Nivel de confianca (0-1)
+  - learnings: string
+
+entries:
+  - id: "EXP-001"
+    title: "CTA primario no empty state do dashboard"
+    hypothesis: >
+      Adicionar CTA de 'Criar primeiro widget' no empty state
+      aumentara a ativacao em 15%.
+    metric: "Widget creation rate (D0)"
+    variant_a: "Empty state com texto informativo apenas"
+    variant_b: "Empty state com CTA 'Criar primeiro widget'"
+    start_date: "2026-01-15"
+    end_date: "2026-02-15"
+    sample_size: 2400
+    result: "winner-b"
+    confidence: 0.96
+    learnings: >
+      CTA no empty state aumentou criacao de widgets em 23%
+      (acima da hipotese de 15%). Maior impacto em usuarios
+      que acessaram o dashboard no primeiro dia (D0).
+
+  - id: "EXP-002"
+    title: "Onboarding em 3 steps vs 5 steps"
+    hypothesis: >
+      Reduzir onboarding de 5 para 3 steps aumentara
+      completion rate em 20%.
+    metric: "Onboarding completion rate"
+    variant_a: "5-step onboarding (atual)"
+    variant_b: "3-step onboarding (consolidado)"
+    start_date: "2026-02-01"
+    end_date: "2026-03-01"
+    sample_size: 3100
+    result: "winner-b"
+    confidence: 0.94
+    learnings: >
+      Completion rate subiu de 58% para 76% (+31%).
+      Dados de perfil coletados posteriormente via
+      progressive profiling sem impacto na retencao.

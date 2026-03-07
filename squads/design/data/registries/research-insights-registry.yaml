@@ -1,0 +1,49 @@
+# Research Insights Registry
+# Registro de insights de pesquisa com usuarios para referencia e rastreamento.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # INS-001
+  - date: date          # Data do estudo
+  - study_type: enum    # usability-test | interview | survey | analytics | support-ticket
+  - title: string       # Titulo do insight
+  - finding: string     # Descoberta principal
+  - evidence: string    # Dados que suportam o insight
+  - impact: enum        # high | medium | low
+  - status: enum        # new | validated | actionable | addressed
+  - related_feature: string
+  - recommendations: list
+
+entries:
+  - id: "INS-001"
+    date: "2026-01-22"
+    study_type: "usability-test"
+    title: "Usuarios nao encontram botao de exportar no dashboard"
+    finding: >
+      7 de 10 participantes nao conseguiram exportar dados
+      do dashboard sem ajuda. O botao esta no menu de overflow.
+    evidence: "Task completion rate: 30% | Avg time: 45s (target: 15s)"
+    impact: "high"
+    status: "actionable"
+    related_feature: "dashboard-export"
+    recommendations:
+      - "Mover botao de exportar para toolbar principal"
+      - "Adicionar tooltip educativo no primeiro uso"
+
+  - id: "INS-002"
+    date: "2026-02-05"
+    study_type: "survey"
+    title: "NPS baixo correlacionado com complexidade de onboarding"
+    finding: >
+      Usuarios com NPS < 6 mencionam complexidade do setup
+      como principal frustracao (42% dos detractors).
+    evidence: "NPS: 32 | Detractor primary reason: setup complexity (42%)"
+    impact: "high"
+    status: "validated"
+    related_feature: "onboarding"
+    recommendations:
+      - "Simplificar onboarding para 3 passos"
+      - "Adicionar templates pre-configurados"
+      - "Implementar progressive profiling"

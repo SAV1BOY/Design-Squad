@@ -1,0 +1,90 @@
+{
+  "$schema": "https://design-tokens.org/schema.json",
+  "description": "Component tokens — valores especificos para componentes, referenciam alias tokens.",
+  "button": {
+    "primary": {
+      "background":       { "value": "{color.action.primary}",       "type": "color" },
+      "background-hover": { "value": "{color.action.primary-hover}", "type": "color" },
+      "text":             { "value": "{color.text.on-action}",       "type": "color" },
+      "border-radius":    { "value": "{borderRadius.md}",            "type": "borderRadius" },
+      "padding-x":        { "value": "{spacing.md}",                 "type": "spacing" },
+      "padding-y":        { "value": "{spacing.sm}",                 "type": "spacing" },
+      "font-size":        { "value": "{fontSize.md}",                "type": "fontSize" },
+      "font-weight":      { "value": "{fontWeight.semibold}",        "type": "fontWeight" }
+    },
+    "secondary": {
+      "background":       { "value": "{color.action.secondary}",       "type": "color" },
+      "background-hover": { "value": "{color.action.secondary-hover}", "type": "color" },
+      "text":             { "value": "{color.text.default}",           "type": "color" },
+      "border":           { "value": "{color.border.default}",         "type": "color" },
+      "border-radius":    { "value": "{borderRadius.md}",              "type": "borderRadius" },
+      "padding-x":        { "value": "{spacing.md}",                   "type": "spacing" },
+      "padding-y":        { "value": "{spacing.sm}",                   "type": "spacing" }
+    },
+    "danger": {
+      "background":       { "value": "{color.action.danger}",       "type": "color" },
+      "background-hover": { "value": "{color.action.danger-hover}", "type": "color" },
+      "text":             { "value": "{color.text.on-action}",      "type": "color" }
+    },
+    "disabled": {
+      "background":       { "value": "{color.action.disabled}",     "type": "color" },
+      "text":             { "value": "{color.text.muted}",          "type": "color" }
+    }
+  },
+  "input": {
+    "background":       { "value": "{color.surface.elevated}",      "type": "color" },
+    "border":           { "value": "{color.border.default}",        "type": "color" },
+    "border-focus":     { "value": "{color.border.focus}",          "type": "color" },
+    "border-error":     { "value": "{color.feedback.error-text}",   "type": "color" },
+    "text":             { "value": "{color.text.default}",          "type": "color" },
+    "placeholder":      { "value": "{color.text.muted}",           "type": "color" },
+    "border-radius":    { "value": "{borderRadius.sm}",             "type": "borderRadius" },
+    "padding-x":        { "value": "{spacing.sm}",                  "type": "spacing" },
+    "padding-y":        { "value": "{spacing.xs}",                  "type": "spacing" },
+    "font-size":        { "value": "{fontSize.md}",                 "type": "fontSize" }
+  },
+  "card": {
+    "background":       { "value": "{color.surface.elevated}",      "type": "color" },
+    "border":           { "value": "{color.border.subtle}",         "type": "color" },
+    "border-radius":    { "value": "{borderRadius.lg}",             "type": "borderRadius" },
+    "padding":          { "value": "{spacing.lg}",                  "type": "spacing" },
+    "elevation":        { "value": "{elevation.sm}",                "type": "boxShadow" },
+    "elevation-hover":  { "value": "{elevation.md}",                "type": "boxShadow" }
+  },
+  "modal": {
+    "background":       { "value": "{color.surface.elevated}",      "type": "color" },
+    "overlay":          { "value": "{color.surface.overlay}",       "type": "color" },
+    "border-radius":    { "value": "{borderRadius.xl}",             "type": "borderRadius" },
+    "padding":          { "value": "{spacing.xl}",                  "type": "spacing" },
+    "elevation":        { "value": "{elevation.lg}",                "type": "boxShadow" }
+  },
+  "toast": {
+    "background":       { "value": "{color.surface.elevated}",      "type": "color" },
+    "border-radius":    { "value": "{borderRadius.md}",             "type": "borderRadius" },
+    "padding":          { "value": "{spacing.md}",                  "type": "spacing" },
+    "elevation":        { "value": "{elevation.md}",                "type": "boxShadow" }
+  },
+  "badge": {
+    "success": {
+      "background":     { "value": "{color.feedback.success-bg}",   "type": "color" },
+      "text":           { "value": "{color.feedback.success-text}", "type": "color" }
+    },
+    "warning": {
+      "background":     { "value": "{color.feedback.warning-bg}",   "type": "color" },
+      "text":           { "value": "{color.feedback.warning-text}", "type": "color" }
+    },
+    "error": {
+      "background":     { "value": "{color.feedback.error-bg}",     "type": "color" },
+      "text":           { "value": "{color.feedback.error-text}",   "type": "color" }
+    },
+    "info": {
+      "background":     { "value": "{color.feedback.info-bg}",      "type": "color" },
+      "text":           { "value": "{color.feedback.info-text}",    "type": "color" }
+    },
+    "border-radius":    { "value": "{borderRadius.full}",           "type": "borderRadius" },
+    "padding-x":        { "value": "{spacing.sm}",                  "type": "spacing" },
+    "padding-y":        { "value": "{spacing.2xs}",                 "type": "spacing" },
+    "font-size":        { "value": "{fontSize.xs}",                 "type": "fontSize" },
+    "font-weight":      { "value": "{fontWeight.medium}",           "type": "fontWeight" }
+  }
+}

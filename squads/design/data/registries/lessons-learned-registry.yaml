@@ -1,0 +1,55 @@
+# Lessons Learned Registry
+# Registro de licoes aprendidas em projetos, sprints e incidentes de design.
+
+schema_version: "1.0"
+last_updated: "2026-03-06"
+
+fields:
+  - id: string          # LL-001
+  - date: date
+  - project: string     # Projeto ou contexto
+  - category: enum      # process | technical | communication | estimation | quality
+  - lesson: string      # Licao aprendida
+  - context: string     # O que aconteceu
+  - impact: string      # Impacto da situacao
+  - action: string      # Acao tomada ou recomendada
+  - status: enum        # documented | action-taken | integrated
+
+entries:
+  - id: "LL-001"
+    date: "2026-01-30"
+    project: "Dashboard Redesign v2"
+    category: "process"
+    lesson: "Design reviews devem incluir engenharia desde o inicio"
+    context: >
+      Handoff revelou que 40% dos componentes projetados nao
+      eram implementaveis sem refatoracao significativa do front-end.
+    impact: "2 semanas de atraso no sprint de implementacao"
+    action: "Incluir tech lead em design reviews a partir da fase de wireframe"
+    status: "action-taken"
+
+  - id: "LL-002"
+    date: "2026-02-15"
+    project: "Design System v2.0"
+    category: "communication"
+    lesson: "Migracoes de breaking changes precisam de migration guide detalhado"
+    context: >
+      Lancamento da v2.0 sem migration guide resultou em 30+
+      tickets de suporte de times consumidores em 1 semana.
+    impact: "1 semana de suporte reativo ao inves de proativo"
+    action: >
+      Criar template de migration guide obrigatorio para toda
+      release com breaking changes.
+    status: "integrated"
+
+  - id: "LL-003"
+    date: "2026-02-28"
+    project: "A11y Remediation Sprint"
+    category: "quality"
+    lesson: "Testes automatizados de a11y devem rodar no CI antes de merge"
+    context: >
+      Regressoes de acessibilidade foram introduzidas apos
+      correcoes terem sido feitas, porque nao havia gate no CI.
+    impact: "Retrabalho em 5 componentes ja corrigidos"
+    action: "Adicionar axe-core como quality gate no pipeline de CI"
+    status: "action-taken"
