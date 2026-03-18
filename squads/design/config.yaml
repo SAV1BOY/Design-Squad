@@ -2,11 +2,12 @@
 # Design Squad — config.yaml
 # O cerebro de roteamento do squad de design.
 # Linguagem mista: chaves em English, descricoes em PT-BR.
+# Versao: 2.0.0 — Audit GOLD/SOTA alignment
 # ============================================================
 
 squad:
   name: design-squad
-  version: "1.0.0"
+  version: "2.0.0"
   description: >
     Squad responsavel por todas as disciplinas de design:
     discovery, UX, UI, design system, prototyping, handoff,
@@ -14,6 +15,7 @@ squad:
   chief_agent: design-chief
   lang: pt-BR
   created: "2026-03-06"
+  updated: "2026-03-18"
 
 # ------------------------------------------------------------
 # Principles
@@ -26,8 +28,53 @@ principles:
   - docs_as_truth
 
 # ------------------------------------------------------------
-# Routing — cada task mapeia agents, frameworks, checklists,
-# templates e registries.
+# Taxonomy — classificacao funcional do squad
+# ------------------------------------------------------------
+taxonomy:
+  domains:
+    - discovery
+    - research
+    - strategy
+    - ux-design
+    - ui-design
+    - design-system
+    - prototyping
+    - handoff
+    - accessibility
+    - qa
+    - governance
+    - operations
+
+  agent_tiers:
+    core_experts: [brad-frost, dan-mall, dave-malouf]
+    functional_agents: [design-chief, ux-design-expert, jessica-ux-ui, design-system-architect, nano-banana-generator]
+
+  teams:
+    research_team:
+      lead: ux-design-expert
+      members: [dave-malouf, jessica-ux-ui]
+      scope: discovery, research, synthesis, personas, JTBD
+    ux_team:
+      lead: ux-design-expert
+      members: [jessica-ux-ui, dave-malouf]
+      scope: IA, user flows, wireframes, journey maps
+    ui_team:
+      lead: jessica-ux-ui
+      members: [design-system-architect, nano-banana-generator]
+      scope: visual design, high-fidelity, motion, explorations
+    ds_team:
+      lead: design-system-architect
+      members: [brad-frost, dan-mall]
+      scope: tokens, components, library, governance
+    governance_team:
+      lead: design-chief
+      members: [dan-mall, dave-malouf, brad-frost]
+      scope: reviews, critiques, debt, metrics, decisions
+
+# ------------------------------------------------------------
+# Routing — cada task mapeia agents (em ordem de execucao),
+# frameworks, checklists, templates e registries.
+# Paths sao relativos a squads/design/
 # ------------------------------------------------------------
 routing:
 
@@ -35,229 +82,431 @@ routing:
 
   problem-definition:
     agents: [design-chief, ux-design-expert, dave-malouf]
-    frameworks: [discovery-brief-framework]
-    checklists: [problem-definition-checklist]
-    templates: [problem-brief-template]
-    registry: [discovery-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "facilitar workshop de framing" }
+      2: { agent: dave-malouf, role: advisor, action: "validar enquadramento estrategico" }
+      3: { agent: design-chief, role: approver, action: "aprovar problem statement final" }
+    frameworks:
+      mandatory: [frameworks/discovery-layer]
+      optional: [frameworks/jobs-to-be-done, frameworks/design-thinking]
+    checklists: [checklists/discovery-brief-quality]
+    templates: [templates/briefs/discovery-brief]
+    registry: data/registries/discovery-registry
+    metrics: [cycle_time_discovery_to_handoff]
+    quality_gate: discovery-brief-quality
+    handoff_rule: "Se problema envolve narrativa de produto, handoff para storytelling_squad"
+    escalation: "Se stakeholders discordam sobre escopo, design-chief escala para PM Lead"
+    rework_loop: "Se gate reprova, retorna a step 1 com feedback especifico"
 
   competitive-ui-audit:
     agents: [jessica-ux-ui, ux-design-expert]
-    frameworks: [competitive-audit-framework]
-    checklists: [competitive-audit-checklist]
-    templates: [competitive-audit-template]
-    registry: [audit-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "executar audit visual e funcional" }
+      2: { agent: ux-design-expert, role: reviewer, action: "validar findings e insights" }
+    frameworks:
+      mandatory: [frameworks/competitive-audit-framework]
+      optional: [frameworks/nielsen-heuristics]
+    checklists: [checklists/ux-audit-quality]
+    templates: [templates/research/competitive-analysis-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: research-plan-quality
+    rework_loop: "Se audit incompleto (< 5 competidores), retorna a jessica-ux-ui"
 
   design-audit-existing-product:
     agents: [design-chief, jessica-ux-ui, brad-frost]
-    frameworks: [design-audit-framework]
-    checklists: [design-audit-checklist]
-    templates: [design-audit-template]
-    registry: [audit-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "executar audit heuristico e visual" }
+      2: { agent: brad-frost, role: advisor, action: "avaliar consistencia de sistema" }
+      3: { agent: design-chief, role: approver, action: "aprovar report final" }
+    frameworks:
+      mandatory: [frameworks/design-audit-framework]
+      optional: [frameworks/nielsen-heuristics, frameworks/frost-interface-inventory]
+    checklists: [checklists/ux-audit-quality]
+    templates: [templates/reports/ux-audit-report-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: discovery-brief-quality
+    rework_loop: "Se findings insuficientes, brad-frost solicita deep-dive em areas especificas"
 
   # === RESEARCH ===
 
   plan-and-run-interviews:
     agents: [ux-design-expert, dave-malouf]
-    frameworks: [interview-framework]
-    checklists: [interview-checklist]
-    templates: [interview-guide-template, interview-notes-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "planejar e executar entrevistas" }
+      2: { agent: dave-malouf, role: advisor, action: "revisar guia e validar insights" }
+    frameworks:
+      mandatory: [frameworks/interview-framework]
+      optional: [frameworks/malouf-research-to-decision]
+    checklists: [checklists/interview-guide-quality, checklists/research/research-consent-and-privacy]
+    templates: [templates/research/interview-script-template, templates/research/interview-notes-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: interview-guide-quality
+    rework_loop: "Se insights vagos, dave-malouf solicita nova rodada com perguntas refinadas"
 
   run-usability-test:
     agents: [ux-design-expert, jessica-ux-ui]
-    frameworks: [usability-test-framework]
-    checklists: [usability-test-checklist]
-    templates: [usability-test-plan-template, usability-report-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "planejar e conduzir testes" }
+      2: { agent: jessica-ux-ui, role: support, action: "preparar prototipos para teste" }
+    frameworks:
+      mandatory: [frameworks/usability-testing-framework]
+      optional: [frameworks/sus-system-usability-scale]
+    checklists: [checklists/usability-test-quality, checklists/prototyping/proto-usability-setup]
+    templates: [templates/research/usability-test-plan, templates/reports/usability-test-report-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: usability-test-quality
+    rework_loop: "Se sample < 5 participantes, re-recrutar antes de sintetizar"
 
   run-card-sort:
     agents: [ux-design-expert]
-    frameworks: [card-sort-framework]
-    checklists: [card-sort-checklist]
-    templates: [card-sort-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "planejar e executar card sort" }
+    frameworks:
+      mandatory: [frameworks/card-sort-framework]
+      optional: [frameworks/information-architecture-toolkit]
+    checklists: [checklists/research-plan-quality]
+    templates: [templates/research/card-sort-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: research-plan-quality
 
   synthesize-insights:
     agents: [ux-design-expert, design-chief]
-    frameworks: [insight-synthesis-framework]
-    checklists: [synthesis-checklist]
-    templates: [insight-report-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "sintetizar dados e gerar insights" }
+      2: { agent: design-chief, role: approver, action: "validar priorizacao de insights" }
+    frameworks:
+      mandatory: [frameworks/insight-synthesis-framework]
+      optional: [frameworks/malouf-research-to-decision, frameworks/jobs-to-be-done]
+    checklists: [checklists/synthesis-quality, checklists/research/research-insight-scoring]
+    templates: [templates/research/insights-and-opportunities-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: synthesis-quality
+    rework_loop: "Se insights nao sao acionaveis, retorna com pedido de evidencias adicionais"
 
   # === INFORMATION ARCHITECTURE ===
 
   build-ia-and-sitemap:
     agents: [ux-design-expert, jessica-ux-ui]
-    frameworks: [ia-framework]
-    checklists: [ia-checklist]
-    templates: [sitemap-template, ia-diagram-template]
-    registry: [ia-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "definir IA e hierarquia" }
+      2: { agent: jessica-ux-ui, role: support, action: "criar sitemap visual" }
+    frameworks:
+      mandatory: [frameworks/information-architecture-toolkit]
+      optional: [frameworks/progressive-disclosure]
+    checklists: [checklists/ia-and-navigation-quality]
+    templates: [templates/ux/ia-sitemap-template]
+    registry: data/registries/design-artifact-registry
+    quality_gate: ia-and-navigation-quality
 
   design-user-flows:
     agents: [ux-design-expert, jessica-ux-ui]
-    frameworks: [ux-flow-framework]
-    checklists: [user-flow-checklist]
-    templates: [user-flow-template]
-    registry: [ia-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "mapear fluxos de usuario" }
+      2: { agent: jessica-ux-ui, role: support, action: "documentar fluxos visuais" }
+    frameworks:
+      mandatory: [frameworks/ux-layer]
+      optional: [frameworks/error-prevention-and-recovery]
+    checklists: [checklists/user-flow-quality]
+    templates: [templates/ux/user-flow-template]
+    registry: data/registries/design-artifact-registry
+    quality_gate: user-flow-quality
 
   create-personas-or-jtbd:
     agents: [ux-design-expert, dave-malouf]
-    frameworks: [strategy-canvas-framework]
-    checklists: [persona-jtbd-checklist]
-    templates: [persona-template, jtbd-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "criar personas ou JTBD" }
+      2: { agent: dave-malouf, role: advisor, action: "validar alinhamento estrategico" }
+    frameworks:
+      mandatory: [frameworks/strategy-layer]
+      optional: [frameworks/jobs-to-be-done, frameworks/malouf-ux-strategy-framework]
+    checklists: [checklists/persona-quality]
+    templates: [templates/ux/persona-template, templates/ux/jtbd-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: persona-quality
 
   create-journey-map:
     agents: [ux-design-expert, jessica-ux-ui]
-    frameworks: [journey-map-framework]
-    checklists: [journey-map-checklist]
-    templates: [journey-map-template]
-    registry: [research-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "mapear jornada do usuario" }
+      2: { agent: jessica-ux-ui, role: support, action: "visualizar journey map" }
+    frameworks:
+      mandatory: [frameworks/user-journey-mapping]
+      optional: [frameworks/service-blueprinting]
+    checklists: [checklists/journey-map-quality]
+    templates: [templates/ux/journey-map-template]
+    registry: data/registries/research-insights-registry
+    quality_gate: journey-map-quality
 
   # === UX DESIGN ===
 
   wireframe-pack:
     agents: [jessica-ux-ui, ux-design-expert]
-    frameworks: [ux-flow-framework]
-    checklists: [wireframe-checklist]
-    templates: [wireframe-pack-template]
-    registry: [design-artifact-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "criar wireframes lo-fi" }
+      2: { agent: ux-design-expert, role: reviewer, action: "revisar fluxo e usabilidade" }
+    frameworks:
+      mandatory: [frameworks/ux-layer]
+      optional: [frameworks/fitts-law, frameworks/hick-law]
+    checklists: [checklists/wireframe-quality]
+    templates: [templates/ui/wireframe-pack-template]
+    registry: data/registries/design-artifact-registry
+    quality_gate: wireframe-quality
+    rework_loop: "Se wireframe falha em heuristic review, retorna a jessica-ux-ui com feedback"
 
   # === UI DESIGN ===
 
   ui-design-high-fidelity:
     agents: [jessica-ux-ui, design-system-architect]
-    frameworks: [ui-visual-framework]
-    checklists: [ui-hifi-checklist]
-    templates: [ui-spec-template]
-    registry: [design-artifact-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "criar UI high-fidelity" }
+      2: { agent: design-system-architect, role: reviewer, action: "validar uso de tokens e componentes" }
+    frameworks:
+      mandatory: [frameworks/ui-layer]
+      optional: [frameworks/gestalt-principles, frameworks/responsive-design-system]
+    checklists: [checklists/ui-visual-quality, checklists/ui/ui-visual-hierarchy]
+    templates: [templates/ui/ui-style-sheet-template]
+    registry: data/registries/design-artifact-registry
+    quality_gate: ui-visual-quality
+    rework_loop: "Se violacao de tokens, design-system-architect bloqueia ate correcao"
 
   build-prototype:
     agents: [jessica-ux-ui, ux-design-expert]
-    frameworks: [prototyping-test-framework]
-    checklists: [prototype-checklist]
-    templates: [prototype-spec-template]
-    registry: [design-artifact-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "construir prototipo interativo" }
+      2: { agent: ux-design-expert, role: reviewer, action: "validar cenarios e interacoes" }
+    frameworks:
+      mandatory: [frameworks/prototyping-layer]
+      optional: [frameworks/hypothesis-driven-design]
+    checklists: [checklists/prototyping-quality, checklists/prototyping/proto-interaction-fidelity]
+    templates: [templates/research/usability-test-plan]
+    registry: data/registries/design-artifact-registry
+    quality_gate: prototyping-quality
 
   design-motion-specs:
     agents: [jessica-ux-ui, design-system-architect]
-    frameworks: [motion-spec-framework]
-    checklists: [motion-spec-checklist]
-    templates: [motion-spec-template]
-    registry: [design-artifact-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "definir motion specs" }
+      2: { agent: design-system-architect, role: reviewer, action: "validar integracao com DS" }
+    frameworks:
+      mandatory: [frameworks/motion-design-system]
+    checklists: [checklists/motion-quality]
+    templates: [templates/ui/motion-spec-template]
+    registry: data/registries/design-artifact-registry
+    quality_gate: motion-quality
 
   content-design-microcopy:
     agents: [ux-design-expert, jessica-ux-ui]
-    frameworks: [content-design-framework]
-    checklists: [microcopy-checklist]
-    templates: [microcopy-template]
-    registry: [content-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "definir microcopy e UX writing" }
+      2: { agent: jessica-ux-ui, role: support, action: "integrar copy na UI" }
+    frameworks:
+      mandatory: [frameworks/content-design-microcopy]
+    checklists: [checklists/content-design-quality]
+    templates: [templates/ui/empty-state-library-template]
+    registry: data/registries/content-registry
+    quality_gate: content-design-quality
+    handoff_rule: "Microcopy final deve ser validado pelo copy_squad antes de publish"
 
   create-visual-explorations:
     agents: [nano-banana-generator, jessica-ux-ui]
-    frameworks: [visual-exploration-framework]
-    checklists: [visual-exploration-checklist]
-    templates: [moodboard-template, style-tile-template]
-    registry: [design-artifact-registry]
+    agent_sequence:
+      1: { agent: nano-banana-generator, role: executor, action: "gerar variacoes visuais rapidas" }
+      2: { agent: jessica-ux-ui, role: curator, action: "selecionar e refinar direcoes" }
+    frameworks:
+      mandatory: [frameworks/visual-exploration-framework]
+      optional: [frameworks/kano-model]
+    checklists: [checklists/ui-visual-quality]
+    templates: [templates/briefs/visual-exploration-brief]
+    registry: data/registries/design-artifact-registry
+    quality_gate: ui-visual-quality
 
   # === DESIGN SYSTEM ===
 
   design-system-bootstrap:
     agents: [design-system-architect, brad-frost, dan-mall]
-    frameworks: [design-system-framework]
-    checklists: [ds-bootstrap-checklist]
-    templates: [ds-bootstrap-template]
-    registry: [design-system-registry]
+    agent_sequence:
+      1: { agent: dan-mall, role: strategist, action: "definir modelo de equipe e governanca" }
+      2: { agent: brad-frost, role: architect, action: "definir arquitetura atomica e tokens" }
+      3: { agent: design-system-architect, role: executor, action: "implementar estrutura base" }
+    frameworks:
+      mandatory: [frameworks/design-system-layer]
+      optional: [frameworks/frost-atomic-design-methodology, frameworks/mall-design-system-strategy]
+    checklists: [checklists/design-system-quality, checklists/design-system/ds-token-architecture]
+    templates: [templates/design-system/component-rfc-template]
+    registry: data/registries/components-registry
+    quality_gate: design-system-quality
+    rework_loop: "Se arquitetura nao segue atomic design, brad-frost bloqueia e reestrutura"
 
   create-component-spec:
     agents: [design-system-architect, brad-frost]
-    frameworks: [design-system-framework]
-    checklists: [component-spec-checklist]
-    templates: [component-spec-template]
-    registry: [design-system-registry]
+    agent_sequence:
+      1: { agent: design-system-architect, role: executor, action: "criar spec de componente" }
+      2: { agent: brad-frost, role: reviewer, action: "validar atomicidade e reutilizacao" }
+    frameworks:
+      mandatory: [frameworks/component-spec-framework]
+      optional: [frameworks/frost-atomic-design-methodology]
+    checklists: [checklists/component-spec-quality, checklists/design-system/ds-component-anatomy]
+    templates: [templates/ui/component-spec-template]
+    registry: data/registries/components-registry
+    quality_gate: component-spec-quality
+    rework_loop: "Se componente nao atende a11y ou nao usa tokens, bloqueia publicacao"
 
   create-or-update-tokens:
     agents: [design-system-architect, brad-frost]
-    frameworks: [token-management-framework]
-    checklists: [token-checklist]
-    templates: [token-spec-template]
-    registry: [token-registry]
+    agent_sequence:
+      1: { agent: design-system-architect, role: executor, action: "criar ou atualizar tokens" }
+      2: { agent: brad-frost, role: reviewer, action: "validar naming e arquitetura 3-tier" }
+    frameworks:
+      mandatory: [frameworks/design-token-architecture]
+    checklists: [checklists/token-quality, checklists/design-system/ds-token-architecture]
+    templates: [templates/design-system/token-spec-template]
+    registry: data/registries/tokens-registry
+    quality_gate: token-quality
 
   publish-library:
     agents: [design-system-architect, design-chief]
-    frameworks: [library-publish-framework]
-    checklists: [library-publish-checklist]
-    templates: [release-notes-template]
-    registry: [design-system-registry]
+    agent_sequence:
+      1: { agent: design-system-architect, role: executor, action: "preparar release da biblioteca" }
+      2: { agent: design-chief, role: approver, action: "aprovar publicacao" }
+    frameworks:
+      mandatory: [frameworks/library-publish-framework]
+      optional: [frameworks/design-system-governance]
+    checklists: [checklists/design-system-quality, checklists/design-system/ds-versioning-and-changelog]
+    templates: [templates/handoff/release-notes-template, templates/design-system/changelog-template]
+    registry: data/registries/components-registry
+    quality_gate: design-system-quality
+    rework_loop: "Se breaking change nao documentado, bloqueia ate changelog atualizado"
 
   ds-health-check:
     agents: [design-system-architect, brad-frost, dan-mall]
-    frameworks: [ds-health-framework]
-    checklists: [ds-health-checklist]
-    templates: [ds-health-report-template]
-    registry: [design-system-registry]
+    agent_sequence:
+      1: { agent: design-system-architect, role: executor, action: "executar health check" }
+      2: { agent: brad-frost, role: advisor, action: "avaliar cobertura e qualidade tecnica" }
+      3: { agent: dan-mall, role: advisor, action: "avaliar adocao e alinhamento estrategico" }
+    frameworks:
+      mandatory: [frameworks/design-system-governance]
+      optional: [frameworks/design-maturity-model]
+    checklists: [checklists/design-system-quality, checklists/design-system/ds-audit-and-dedup]
+    templates: [templates/design-system/ds-health-report-template]
+    registry: data/registries/components-registry
+    quality_gate: design-system-quality
 
   # === ACCESSIBILITY ===
 
   a11y-audit:
     agents: [ux-design-expert, design-system-architect]
-    frameworks: [a11y-audit-framework]
-    checklists: [a11y-audit-checklist]
-    templates: [a11y-report-template]
-    registry: [a11y-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "executar audit WCAG" }
+      2: { agent: design-system-architect, role: support, action: "verificar componentes do DS" }
+    frameworks:
+      mandatory: [frameworks/accessibility-wcag-aa]
+      optional: [frameworks/accessibility-by-default]
+    checklists: [checklists/accessibility-quality, checklists/accessibility/a11y-wcag-audit]
+    templates: [templates/reports/a11y-audit-report-template]
+    registry: data/registries/accessibility-issues-registry
+    quality_gate: accessibility-quality
+    rework_loop: "Violacoes criticas bloqueiam release ate remediacao completa"
 
   remediate-and-verify:
     agents: [jessica-ux-ui, design-system-architect]
-    frameworks: [a11y-remediation-framework]
-    checklists: [a11y-remediation-checklist]
-    templates: [a11y-remediation-template]
-    registry: [a11y-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "corrigir violacoes de a11y" }
+      2: { agent: design-system-architect, role: verifier, action: "verificar correcoes no DS" }
+    frameworks:
+      mandatory: [frameworks/accessibility-by-default]
+    checklists: [checklists/accessibility-quality, checklists/accessibility/a11y-color-contrast]
+    templates: [templates/reports/a11y-audit-report-template]
+    registry: data/registries/accessibility-issues-registry
+    quality_gate: accessibility-quality
 
   # === HANDOFF & QA ===
 
   dev-handoff:
     agents: [jessica-ux-ui, design-system-architect, design-chief]
-    frameworks: [handoff-spec-framework]
-    checklists: [handoff-checklist]
-    templates: [handoff-package-template]
-    registry: [handoff-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "preparar pacote de handoff" }
+      2: { agent: design-system-architect, role: reviewer, action: "validar tokens e specs" }
+      3: { agent: design-chief, role: approver, action: "aprovar handoff final" }
+    frameworks:
+      mandatory: [frameworks/handoff-layer]
+      optional: [frameworks/design-to-code-handoff]
+    checklists: [checklists/handoff-quality, checklists/handoff/handoff-specs-and-redlines, checklists/handoff/handoff-token-sync]
+    templates: [templates/handoff/dev-handoff-checklist-template, templates/handoff/edge-cases-documentation-template]
+    registry: data/registries/handoff-registry
+    quality_gate: handoff-quality
+    rework_loop: "Se specs incompletas ou assets faltando, bloqueia handoff e retorna a jessica-ux-ui"
 
   qa-with-engineering:
     agents: [design-chief, jessica-ux-ui]
-    frameworks: [qa-review-framework]
-    checklists: [qa-visual-checklist]
-    templates: [qa-report-template]
-    registry: [qa-registry]
+    agent_sequence:
+      1: { agent: jessica-ux-ui, role: executor, action: "comparar implementacao com specs" }
+      2: { agent: design-chief, role: approver, action: "decisao final de aprovacao" }
+    frameworks:
+      mandatory: [frameworks/qa-review-framework]
+    checklists: [checklists/handoff/handoff-qa-with-dev]
+    templates: [templates/handoff/qa-bug-template]
+    registry: data/registries/qa-registry
+    quality_gate: handoff-quality
+    rework_loop: "Se bugs visuais criticos, bloqueia merge e reporta via qa-bug-template"
 
   # === GOVERNANCE ===
 
   post-release-review:
     agents: [design-chief, ux-design-expert, dan-mall]
-    frameworks: [governance-ops-framework]
-    checklists: [post-release-checklist]
-    templates: [post-release-report-template]
-    registry: [governance-registry]
+    agent_sequence:
+      1: { agent: ux-design-expert, role: executor, action: "coletar metricas pos-release" }
+      2: { agent: dan-mall, role: advisor, action: "avaliar impacto estrategico" }
+      3: { agent: design-chief, role: approver, action: "consolidar learnings" }
+    frameworks:
+      mandatory: [frameworks/governance-layer]
+      optional: [frameworks/heart-metrics-framework, frameworks/north-star-and-success-metrics]
+    checklists: [checklists/design-system/ds-design-code-sync-audit]
+    templates: [templates/reports/design-review-report-template]
+    registry: data/registries/governance-registry
+    quality_gate: metrics-review-quality
 
   design-critique-session:
     agents: [design-chief, dan-mall, dave-malouf]
-    frameworks: [design-critique-framework]
-    checklists: [critique-checklist]
-    templates: [critique-session-template]
-    registry: [governance-registry]
+    agent_sequence:
+      1: { agent: dan-mall, role: facilitator, action: "facilitar sessao de critica" }
+      2: { agent: dave-malouf, role: advisor, action: "avaliar qualidade e maturidade" }
+      3: { agent: design-chief, role: recorder, action: "registrar decisoes e acoes" }
+    frameworks:
+      mandatory: [frameworks/design-review-and-critique]
+      optional: [frameworks/malouf-design-quality-model]
+    checklists: [checklists/design-critique-quality]
+    templates: [templates/reports/design-review-report-template]
+    registry: data/registries/governance-registry
+    quality_gate: design-critique-quality
 
   quarterly-design-review:
     agents: [design-chief, dan-mall, dave-malouf, brad-frost]
-    frameworks: [governance-ops-framework]
-    checklists: [quarterly-review-checklist]
-    templates: [quarterly-review-template]
-    registry: [governance-registry]
+    agent_sequence:
+      1: { agent: design-chief, role: executor, action: "preparar relatorio trimestral" }
+      2: { agent: dan-mall, role: advisor, action: "avaliar eficiencia operacional" }
+      3: { agent: dave-malouf, role: advisor, action: "avaliar maturidade do squad" }
+      4: { agent: brad-frost, role: advisor, action: "avaliar saude do design system" }
+    frameworks:
+      mandatory: [frameworks/governance-layer]
+      optional: [frameworks/design-maturity-model, frameworks/malouf-designops-framework]
+    checklists: [checklists/design-documentation-quality]
+    templates: [templates/reports/quarterly-design-report]
+    registry: data/registries/governance-registry
+    quality_gate: metrics-review-quality
 
   design-debt-prioritization:
     agents: [design-chief, design-system-architect, dan-mall]
-    frameworks: [design-debt-framework]
-    checklists: [design-debt-checklist]
-    templates: [design-debt-backlog-template]
-    registry: [governance-registry]
+    agent_sequence:
+      1: { agent: design-system-architect, role: executor, action: "inventariar debt e classificar" }
+      2: { agent: dan-mall, role: advisor, action: "priorizar por impacto vs esforco" }
+      3: { agent: design-chief, role: approver, action: "aprovar backlog de debt" }
+    frameworks:
+      mandatory: [frameworks/design-debt-management]
+      optional: [frameworks/mall-1000-dollar-exercise]
+    checklists: [checklists/design-debt-quality]
+    templates: [templates/reports/design-debt-report-template]
+    registry: data/registries/design-debt-registry
+    quality_gate: design-debt-quality
 
 # ------------------------------------------------------------
 # Cross-Squad Integration
@@ -276,6 +525,9 @@ cross_squad:
     shared_assets:
       - brand-voice-tokens
       - content-patterns
+    contract: workflows/handoff-contract-copy-squad
+    quality_gate_on_receive: "Validar que guidelines de voz estao atualizadas"
+    quality_gate_on_send: "Validar que contexto de tela inclui user flow completo"
 
   brand_squad:
     handoff_to_design:
@@ -291,6 +543,9 @@ cross_squad:
       - color-tokens
       - typography-tokens
       - logo-assets
+    contract: workflows/handoff-contract-brand-squad
+    quality_gate_on_receive: "Validar que brand assets seguem formato e resolucao padrao"
+    quality_gate_on_send: "Validar que extensoes de paleta mantêm harmonia com brand"
 
   traffic_squad:
     handoff_to_design:
@@ -305,6 +560,9 @@ cross_squad:
     shared_assets:
       - event-taxonomy
       - funnel-definitions
+    contract: workflows/handoff-contract-traffic-squad
+    quality_gate_on_receive: "Validar que dados tem sample size minimo para decisao"
+    quality_gate_on_send: "Validar que variantes tem specs completas para implementacao"
 
   storytelling_squad:
     handoff_to_design:
@@ -318,9 +576,12 @@ cross_squad:
     shared_assets:
       - illustration-library
       - animation-assets
+    contract: workflows/handoff-contract-storytelling-squad
+    quality_gate_on_receive: "Validar que narrativa esta alinhada com pesquisa de usuario"
+    quality_gate_on_send: "Validar que storyboard segue brand guidelines"
 
 # ------------------------------------------------------------
-# Quality Gates
+# Quality Gates — sistema em cascata
 # ------------------------------------------------------------
 quality_gates:
 
@@ -330,31 +591,202 @@ quality_gates:
         Todo projeto deve ter um brief de discovery validado
         antes de avancar para qualquer fase de design.
       blocking: true
+      owner: design-chief
+      checklist: checklists/discovery-brief-quality
+      pass_criteria: "100% dos itens obrigatorios marcados"
 
     - gate: accessibility-quality
       description: >
         Auditoria de acessibilidade WCAG 2.1 AA obrigatoria.
         Violacoes criticas bloqueiam release.
       blocking: true
+      owner: ux-design-expert
+      checklist: checklists/accessibility-quality
+      pass_criteria: "0 violacoes criticas, 0 violacoes graves"
 
     - gate: handoff-quality
       description: >
         Pacote de handoff deve conter specs completas,
         tokens mapeados e assets exportados.
       blocking: true
+      owner: design-chief
+      checklist: checklists/handoff-quality
+      pass_criteria: "100% dos itens do handoff checklist"
 
   per_domain:
     - gate: component-spec-quality
       applies_to: [design-system-bootstrap, create-component-spec, create-or-update-tokens]
       description: Componentes devem ter spec completa antes de publicacao.
+      owner: design-system-architect
+      checklist: checklists/component-spec-quality
+      pass_criteria: "Spec completa com props, states, tokens, a11y e exemplos"
 
     - gate: usability-test-quality
       applies_to: [build-prototype, run-usability-test]
       description: Prototipos testados devem ter relatorio de findings.
+      owner: ux-design-expert
+      checklist: checklists/usability-test-quality
+      pass_criteria: "Min 5 participantes, findings priorizados, recommendations"
 
     - gate: metrics-review-quality
       applies_to: [post-release-review, quarterly-design-review]
       description: Reviews devem incluir dados quantitativos validados.
+      owner: design-chief
+      pass_criteria: "Metricas HEART + KPIs operacionais com baseline e target"
+
+  inter_agent:
+    - gate: ux-to-ui-transition
+      description: Wireframes devem estar aprovados antes de iniciar UI high-fidelity.
+      from_agent: ux-design-expert
+      to_agent: jessica-ux-ui
+      checklist: checklists/wireframe-quality
+      pass_criteria: "Wireframes revisados e aprovados por ux-design-expert"
+
+    - gate: ui-to-ds-transition
+      description: UI specs devem usar tokens existentes antes de criar novos.
+      from_agent: jessica-ux-ui
+      to_agent: design-system-architect
+      checklist: checklists/token-quality
+      pass_criteria: "100% dos valores visuais mapeados para tokens"
+
+    - gate: ds-to-handoff-transition
+      description: Componentes devem estar documentados antes de handoff.
+      from_agent: design-system-architect
+      to_agent: jessica-ux-ui
+      checklist: checklists/component-spec-quality
+      pass_criteria: "Component spec completa com todas as variantes"
+
+  inter_squad:
+    - gate: design-to-copy-handoff
+      description: Contexto de tela deve estar completo antes de solicitar copy.
+      from_squad: design
+      to_squad: copy
+      pass_criteria: "User flow + wireframe + contexto de uso documentados"
+
+    - gate: brand-to-design-receive
+      description: Brand assets devem estar no formato correto antes de uso.
+      from_squad: brand
+      to_squad: design
+      pass_criteria: "Assets em formato vetorial, tokens de cor documentados"
+
+  cascade_logic: >
+    Gates operam em cascata: agent_gate -> domain_gate -> mandatory_gate -> chief_approval.
+    Se qualquer gate falha, a saida retorna ao agente responsavel com feedback especifico.
+    O design-chief pode overridar gates per_domain com justificativa documentada.
+    Gates mandatory NUNCA podem ser overridados.
+
+# ------------------------------------------------------------
+# Escalation Rules
+# ------------------------------------------------------------
+escalation_rules:
+
+  within_squad:
+    - trigger: "Agent nao consegue resolver task em 2x o tempo estimado"
+      action: "Escalar para design-chief para reavaliacao de escopo ou agent reassignment"
+
+    - trigger: "Dois agents discordam sobre abordagem"
+      action: "Design-chief arbitra com base em evidencias. Se sem evidencias, consulta core expert relevante"
+
+    - trigger: "Quality gate reprova 3x consecutivas"
+      action: "Design-chief convoca sessao de troubleshooting com agent + reviewer"
+
+  cross_squad:
+    - trigger: "Dependencia de outro squad bloqueia task por mais de 3 dias uteis"
+      action: "Design-chief escala para PM Lead com contexto e impacto documentados"
+
+    - trigger: "Output recebido de outro squad nao atende quality gate"
+      action: "Design-chief devolve com feedback especifico e sugere sessao de alinhamento"
+
+  to_hrm_layer:
+    - trigger: "Conflito de prioridade entre squads nao resolvido em 5 dias uteis"
+      action: "Escalar para HRM Chief / Central Command com documentacao completa"
+
+    - trigger: "Squad sobrecarregado sem possibilidade de renegociacao"
+      action: "Design-chief reporta ao HRM Layer com proposta de realocacao ou repriorizacao"
+
+# ------------------------------------------------------------
+# Delegation Rules
+# ------------------------------------------------------------
+delegation_rules:
+
+  - condition: "Task envolve UX writing / microcopy extensivo"
+    delegate_to: copy_squad
+    handoff_includes: [contexto-de-tela, fluxo-do-usuario, tom-de-voz-esperado]
+
+  - condition: "Task envolve criacao de identidade visual from scratch"
+    delegate_to: brand_squad
+    handoff_includes: [briefing-visual, referencias, constraints-de-produto]
+
+  - condition: "Task requer analise quantitativa de comportamento"
+    delegate_to: traffic_squad
+    handoff_includes: [hipoteses, metricas-de-interesse, periodo-de-analise]
+
+  - condition: "Task requer narrativa de produto ou case study"
+    delegate_to: storytelling_squad
+    handoff_includes: [dados-de-pesquisa, assets-visuais, resultados-de-metricas]
+
+  - condition: "Task exige implementacao frontend"
+    action: "NAO delegar — design squad NAO implementa codigo. Handoff para engineering."
+
+# ------------------------------------------------------------
+# Cadence / Loops / Kaizen
+# ------------------------------------------------------------
+cadence:
+
+  daily:
+    - name: design-standup
+      participants: [design-chief, functional_agents]
+      duration: 15min
+      purpose: "Status, blockers, priorizacao do dia"
+
+  weekly:
+    - name: design-critique
+      participants: all_agents
+      duration: 60min
+      purpose: "Critica construtiva de trabalho em progresso"
+      framework: frameworks/design-review-and-critique
+
+    - name: design-ops-sync
+      participants: [design-chief, design-system-architect]
+      duration: 30min
+      purpose: "Saude do DS, debt, backlog de melhorias"
+
+  biweekly:
+    - name: cross-squad-sync
+      participants: [design-chief]
+      duration: 30min
+      purpose: "Alinhamento com Copy, Brand, Traffic, Storytelling"
+
+  quarterly:
+    - name: quarterly-design-review
+      participants: all_agents
+      duration: 120min
+      purpose: "Review completo de metricas, maturidade e roadmap"
+      framework: frameworks/governance-layer
+
+  continuous:
+    - name: kaizen-loop
+      description: >
+        Ciclo continuo de melhoria: Create -> Test -> Analyze -> Learn -> Adjust.
+        Cada ciclo gera entrada em data/learnings/learning-log.yaml.
+        Lessons learned alimentam proximas decisoes via data/registries/lessons-learned-registry.yaml.
+      trigger: "Apos cada post-release-review ou quarterly-review"
+      output: data/learnings/learning-log
+
+# ------------------------------------------------------------
+# Score Thresholds
+# ------------------------------------------------------------
+score_thresholds:
+
+  gate_pass: 100%          # Gates mandatory exigem 100% dos itens
+  gate_pass_domain: 90%    # Gates per_domain aceitam 90% com justificativa
+  quality_bar_minimum: 80% # Abaixo de 80% em qualquer checklist = rework obrigatorio
+  gold_standard: 95%       # Acima de 95% = nivel GOLD
+  sota_threshold: 98%      # Acima de 98% = nivel SOTA
+
+  agent_performance:
+    rework_rate_max: 15%   # Se agent tem > 15% rework rate, review de performance
+    throughput_min: 3       # Min 3 tasks/sprint por agent funcional
 
 # ------------------------------------------------------------
 # KPIs
