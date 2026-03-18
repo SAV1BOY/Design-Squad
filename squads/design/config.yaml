@@ -580,6 +580,129 @@ cross_squad:
     quality_gate_on_receive: "Validar que narrativa esta alinhada com pesquisa de usuario"
     quality_gate_on_send: "Validar que storyboard segue brand guidelines"
 
+  data_squad:
+    handoff_to_design:
+      - analytics-reports
+      - funnel-data
+      - user-behavior-metrics
+      - ab-test-results
+    handoff_from_design:
+      - tracking-requirements
+      - event-specs
+      - metrics-definitions
+      - experiment-hypotheses
+    shared_assets:
+      - event-taxonomy
+      - metrics-dashboard-templates
+    contract: workflows/handoff-contract-data-squad
+    quality_gate_on_receive: "Validar que dados tem sample size e periodo adequados para decisao"
+    quality_gate_on_send: "Validar que tracking specs cobrem todos os fluxos e estados criticos"
+
+  pre_programming_squad:
+    handoff_to_design:
+      - technical-constraints
+      - api-capabilities
+      - platform-limitations
+      - performance-budgets
+    handoff_from_design:
+      - design-specs
+      - component-specs
+      - token-specs
+      - interaction-specs
+      - asset-package
+    shared_assets:
+      - component-api-contracts
+      - design-token-files
+    contract: workflows/handoff-contract-pre-programming-squad
+    quality_gate_on_receive: "Validar que constraints tecnicas estao documentadas com alternativas"
+    quality_gate_on_send: "Validar que specs cobrem todos os estados, breakpoints e edge cases"
+
+  deepresearch_squad:
+    handoff_to_design:
+      - research-briefs
+      - market-analysis
+      - user-behavior-reports
+      - competitive-intelligence
+    handoff_from_design:
+      - research-questions
+      - hypothesis-list
+      - specific-inquiry-briefs
+    shared_assets:
+      - research-repository
+      - insight-registry
+    contract: workflows/handoff-contract-deepresearch-squad
+    quality_gate_on_receive: "Validar que pesquisa tem metodologia clara e fontes documentadas"
+    quality_gate_on_send: "Validar que perguntas de pesquisa sao especificas e acionaveis"
+
+  cybersecurity_squad:
+    handoff_to_design:
+      - security-requirements
+      - compliance-constraints
+      - vulnerability-reports
+      - auth-patterns
+    handoff_from_design:
+      - security-ux-review
+      - auth-flow-designs
+      - privacy-ux-patterns
+      - consent-flows
+    shared_assets:
+      - auth-pattern-library
+      - privacy-consent-templates
+    contract: workflows/handoff-contract-cybersecurity-squad
+    quality_gate_on_receive: "Validar que requisitos incluem nivel de risco e prioridade"
+    quality_gate_on_send: "Validar que fluxos de auth cobrem todos os cenarios de erro e recuperacao"
+
+  c_level_squad:
+    handoff_to_design:
+      - strategic-direction
+      - product-vision
+      - okrs
+      - budget-constraints
+    handoff_from_design:
+      - design-impact-report
+      - quarterly-metrics
+      - maturity-assessment
+      - investment-proposals
+    shared_assets:
+      - quarterly-reports
+      - design-maturity-scorecard
+    contract: workflows/handoff-contract-c-level-squad
+    quality_gate_on_receive: "Validar que direcao estrategica tem KPIs mensuraveis e timeline"
+    quality_gate_on_send: "Validar que reports incluem metricas quantitativas e recomendacoes acionaveis"
+
+  advisory_board_squad:
+    handoff_to_design:
+      - governance-guidelines
+      - industry-benchmarks
+      - organizational-standards
+    handoff_from_design:
+      - quarterly-scorecard
+      - maturity-evolution
+      - risk-assessments
+    shared_assets:
+      - governance-framework
+      - maturity-model
+    contract: workflows/handoff-contract-advisory-board-squad
+    quality_gate_on_receive: "Validar que guidelines tem criterios verificaveis e aplicaveis"
+    quality_gate_on_send: "Validar que scorecards refletem dados reais do periodo com evidencias"
+
+  movement_squad:
+    handoff_to_design:
+      - cultural-context
+      - community-insights
+      - movement-identity
+      - audience-profiles
+    handoff_from_design:
+      - visual-identity-alignment
+      - brand-expression-in-product
+      - community-ux-patterns
+    shared_assets:
+      - cultural-design-tokens
+      - community-pattern-library
+    contract: workflows/handoff-contract-movement-squad
+    quality_gate_on_receive: "Validar que contexto cultural tem fontes e validacao com comunidade"
+    quality_gate_on_send: "Validar que alinhamento visual respeita guidelines de marca e cultura"
+
 # ------------------------------------------------------------
 # Quality Gates — sistema em cascata
 # ------------------------------------------------------------
@@ -669,6 +792,36 @@ quality_gates:
       to_squad: design
       pass_criteria: "Assets em formato vetorial, tokens de cor documentados"
 
+    - gate: design-to-pre-programming-handoff
+      description: Design specs devem estar completas com todos os estados e breakpoints.
+      from_squad: design
+      to_squad: pre-programming
+      pass_criteria: "Specs com todos os estados, edge cases, breakpoints e tokens mapeados"
+
+    - gate: data-to-design-receive
+      description: Dados analiticos devem ter sample size e periodo adequados.
+      from_squad: data
+      to_squad: design
+      pass_criteria: "Sample size minimo documentado, periodo de coleta >= 2 semanas"
+
+    - gate: design-to-deepresearch-handoff
+      description: Research questions devem ser especificas e acionaveis.
+      from_squad: design
+      to_squad: deepresearch
+      pass_criteria: "Perguntas com hipotese, contexto e criterio de suficiencia definidos"
+
+    - gate: cybersecurity-to-design-receive
+      description: Security requirements devem ter nivel de risco classificado.
+      from_squad: cybersecurity
+      to_squad: design
+      pass_criteria: "Requisitos com nivel de risco, prioridade e cenarios de ameaca"
+
+    - gate: design-to-c-level-report
+      description: Impact reports devem conter metricas quantitativas reais.
+      from_squad: design
+      to_squad: c-level
+      pass_criteria: "Metricas com baseline, target, resultado atual e recomendacoes"
+
   cascade_logic: >
     Gates operam em cascata: agent_gate -> domain_gate -> mandatory_gate -> chief_approval.
     Se qualquer gate falha, a saida retorna ao agente responsavel com feedback especifico.
@@ -725,8 +878,24 @@ delegation_rules:
     delegate_to: storytelling_squad
     handoff_includes: [dados-de-pesquisa, assets-visuais, resultados-de-metricas]
 
+  - condition: "Task requer pesquisa profunda de mercado ou academica"
+    delegate_to: deepresearch_squad
+    handoff_includes: [research-questions, hipoteses, contexto-do-problema, criterio-de-suficiencia]
+
+  - condition: "Task envolve requisitos de seguranca, autenticacao ou privacidade"
+    delegate_to: cybersecurity_squad
+    handoff_includes: [fluxo-atual, pontos-de-risco-identificados, requisitos-de-compliance]
+
+  - condition: "Task requer dados analiticos de comportamento ou metricas de produto"
+    delegate_to: data_squad
+    handoff_includes: [hipoteses, metricas-de-interesse, periodo-de-analise, segmentos-alvo]
+
+  - condition: "Task requer alinhamento cultural ou comunitario"
+    delegate_to: movement_squad
+    handoff_includes: [contexto-visual, publico-alvo, valores-de-marca]
+
   - condition: "Task exige implementacao frontend"
-    action: "NAO delegar — design squad NAO implementa codigo. Handoff para engineering."
+    action: "NAO delegar — design squad NAO implementa codigo. Handoff para pre-programming."
 
 # ------------------------------------------------------------
 # Cadence / Loops / Kaizen
@@ -754,8 +923,13 @@ cadence:
   biweekly:
     - name: cross-squad-sync
       participants: [design-chief]
+      duration: 45min
+      purpose: "Alinhamento com todos os squads integrados: Copy, Brand, Traffic, Storytelling, Data, Pre-Programming, Deep Research, Cybersecurity, Movement"
+
+    - name: strategic-alignment
+      participants: [design-chief]
       duration: 30min
-      purpose: "Alinhamento com Copy, Brand, Traffic, Storytelling"
+      purpose: "Alinhamento estrategico com C-Level e Advisory Board (quando aplicavel)"
 
   quarterly:
     - name: quarterly-design-review

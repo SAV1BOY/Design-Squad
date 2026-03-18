@@ -148,30 +148,67 @@ O `nano-banana-generator` atua como agente auxiliar de qualquer outro.
 
 ## 7. Cross-Squad Integration
 
+O Design Squad integra com **11 squads do ecossistema MMOS**, organizados por tier de frequencia:
+
 ```
-+----------------+       +----------------+
-|   Copy Squad   | <---> | Design Squad   |
-+----------------+       +-------+--------+
-                                 |
-+----------------+       +-------+--------+
-|  Brand Squad   | <---> | Design Squad   |
-+----------------+       +-------+--------+
-                                 |
-+----------------+       +-------+--------+
-| Traffic Squad  | <---> | Design Squad   |
-+----------------+       +-------+--------+
-                                 |
-+----------------+       +-------+--------+
-|Storytelling Sq | <---> | Design Squad   |
-+----------------+       +----------------+
+                              TIER 1 — Daily/Weekly
+                    +----------------+       +-------------------+
+                    |   Copy Squad   | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |                   |
+                    |  Brand Squad   | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |   DESIGN SQUAD    |
+                    |Pre-Programming | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |                   |
+                    |  Data Squad    | <---> |                   |
+                    +----------------+       +-------------------+
+
+                              TIER 2 — Sprint-level
+                    +----------------+       +-------------------+
+                    | Traffic Squad  | <---> |                   |
+                    +----------------+       |   DESIGN SQUAD    |
+                    +----------------+       |                   |
+                    |Storytelling Sq | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |                   |
+                    |Deep Research   | <---> |                   |
+                    +----------------+       +-------------------+
+
+                              TIER 3 — Monthly/Quarterly
+                    +----------------+       +-------------------+
+                    |Cybersecurity   | <---> |                   |
+                    +----------------+       |   DESIGN SQUAD    |
+                    +----------------+       |                   |
+                    |   C-Level      | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |                   |
+                    |Advisory Board  | <---> |                   |
+                    +----------------+       |                   |
+                    +----------------+       |                   |
+                    | Movement Squad | <---> |                   |
+                    +----------------+       +-------------------+
 ```
 
-Todas as integracoes sao **bidirecionais**:
+Todas as integracoes sao **bidirecionais**. Cada uma possui handoff contract formal em `workflows/`.
 
-- **Copy Squad**: microcopy, UX writing, tom de voz em interfaces.
-- **Brand Squad**: brand guidelines, paleta, tipografia, identidade visual.
-- **Traffic Squad**: dados de comportamento, funnels, heatmaps, analytics.
-- **Storytelling Squad**: narrativas de produto, onboarding flows, case studies.
+### Tier 1 — Integracao Diaria/Semanal
+- **Copy Squad**: microcopy, UX writing, tom de voz em interfaces. Contract: `workflows/handoff-contract-copy-squad`.
+- **Brand Squad**: brand guidelines, paleta, tipografia, identidade visual. Contract: `workflows/handoff-contract-brand-squad`.
+- **Pre-Programming Squad**: design specs, component specs, technical constraints, platform limitations. Contract: `workflows/handoff-contract-pre-programming-squad`.
+- **Data Squad**: analytics, funnel data, tracking requirements, experiment hypotheses. Contract: `workflows/handoff-contract-data-squad`.
+
+### Tier 2 — Integracao por Sprint
+- **Traffic Squad**: dados de comportamento, funnels, heatmaps, variantes de A/B test. Contract: `workflows/handoff-contract-traffic-squad`.
+- **Storytelling Squad**: narrativas de produto, onboarding flows, case studies. Contract: `workflows/handoff-contract-storytelling-squad`.
+- **Deep Research Squad**: research briefs, market analysis, competitive intelligence, research questions. Contract: `workflows/handoff-contract-deepresearch-squad`.
+
+### Tier 3 — Integracao Mensal/Trimestral
+- **Cybersecurity Squad**: security requirements, auth patterns, compliance constraints, security UX review. Contract: `workflows/handoff-contract-cybersecurity-squad`.
+- **C-Level Squad**: strategic direction, OKRs, design impact reports, maturity assessment. Contract: `workflows/handoff-contract-c-level-squad`.
+- **Advisory Board Squad**: governance guidelines, industry benchmarks, quarterly scorecards. Contract: `workflows/handoff-contract-advisory-board-squad`.
+- **Movement Squad**: cultural context, community insights, visual identity alignment. Contract: `workflows/handoff-contract-movement-squad`.
 
 ---
 
