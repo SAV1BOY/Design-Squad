@@ -3,131 +3,131 @@
 ## Metadata
 
 - **Autor**: Design Squad
-- **Categoria**: Quality Assurance, Handoff, Validacao
+- **Categoria**: Quality Assurance, Handoff, Design-Dev Collaboration
 - **Complexidade**: Media
-- **Aplicacao**: Comparar specs de design com implementacao, reportar bugs visuais/funcionais com severidade
+- **Aplicacao**: Comparar specs de design com implementacao e reportar discrepancias de forma estruturada
 - **Ultima atualizacao**: 2026-03-18
-- **Tags**: qa, visual-review, spec-comparison, bug-reporting, severity, prioritization, pixel-perfect
+- **Tags**: qa, visual-qa, pixel-comparison, behavior-testing, bug-report, severity, handoff
 
 ## Concept
 
-O QA Review Framework estrutura o processo de validacao visual e funcional — a comparacao
-sistematica entre o que foi especificado no design e o que foi implementado no codigo. O
-objetivo nao e "pixel-perfect" obsessivo, mas garantir que a intencao de design (hierarquia,
-usabilidade, acessibilidade, consistencia) foi preservada na implementacao.
+O QA Review Framework estrutura o processo de verificacao visual e funcional entre o que foi
+especificado no design e o que foi implementado no codigo. QA de design nao e "achar defeito" —
+e garantir que a experiencia entregue ao usuario corresponde a intencao do design. Sem QA
+estruturado, discrepancias se acumulam ate que o produto diverge significativamente das specs.
 
-O framework define como inspecionar, como reportar discrepancias com severidade objetiva, e
-como priorizar correcoes para que bugs criticos de UX nao fiquem atras de detalhes cosmeticos.
-O QA de design e complementar ao QA funcional de engenharia — foca na experiencia percebida
-pelo usuario, nao apenas em "funciona vs. nao funciona".
+O framework cobre dois tipos de verificacao: pixel comparison (espacamento, cores, tipografia,
+alinhamento, responsividade) e behavior testing (estados, transicoes, interacoes, edge cases).
+Para cada discrepancia encontrada, define severity levels e workflow de resolucao que evita
+ping-pong improdutivo entre design e dev.
 
 ## When to Use
 
-- Antes de cada release que inclui mudancas visuais ou de interacao
-- Apos implementacao de novos componentes do design system
-- Quando engenharia sinaliza "pronto para review de design"
-- Em ciclos de QA regulares para features em desenvolvimento
-- Apos hotfixes que tocaram camada de UI
-- Para validar responsive behavior em breakpoints criticos
+- Apos implementacao de novas features ou componentes de UI
+- Em sprints de refinamento visual antes de releases
+- Quando usuarios reportam inconsistencias visuais
+- Ao migrar para nova versao do design system
+- Para auditar qualidade visual de telas criticas (onboarding, checkout, core flows)
+- Como gate de qualidade antes de cada release
 
 ## How to Apply
 
-### Step 1 — Preparar Review
-1. Obtenha acesso ao ambiente de staging/preview com a implementacao
-2. Abra os specs de design correspondentes (Figma, Zeplin, ou ferramenta de handoff)
-3. Prepare checklist de review baseado nas dimensoes abaixo
-4. Defina devices/browsers a testar: minimo desktop + mobile principal
-5. Garanta que dados de teste sao representativos (nomes reais, textos longos, edge cases)
+### Step 1 — Preparar Review Environment
+1. Abra as specs de design (Figma) e a implementacao (staging/preview) lado a lado
+2. Use mesmo device ou resolucao que o design especifica (breakpoints principais)
+3. Configure dados realistas na implementacao — evite "Lorem ipsum" ou dados perfeitos
+4. Verifique em multiplos breakpoints: mobile (375px), tablet (768px), desktop (1440px)
+5. Prepare ferramentas: browser DevTools, extensao de pixel overlay (PerfectPixel), Figma inspect
+6. Tenha o design token spec acessivel para verificar valores exatos
 
-### Step 2 — Inspecao Visual
-Compare specs vs. implementacao em cada dimensao:
+### Step 2 — Pixel Comparison (Visual Review)
+1. **Tipografia**: Fonte, tamanho, peso, line-height, letter-spacing, cor de texto
+2. **Cores**: Background, bordas, shadows — compare hex/rgb exatos com tokens do DS
+3. **Espacamento**: Padding, margin, gap — use DevTools para medir valores reais
+4. **Alinhamento**: Elementos alinhados conforme grid? Centralizacao correta?
+5. **Icones e imagens**: Tamanho correto, aspect ratio mantido, qualidade de renderizacao
+6. **Responsividade**: Layout adapta corretamente em cada breakpoint especificado?
+7. **Dark mode**: Se aplicavel, todos os tokens de cor invertendo corretamente?
+8. Use overlay de screenshot do Figma sobre implementacao para detectar desvios sutis
 
-| Dimensao | O que verificar |
-|---|---|
-| **Layout & Spacing** | Margins, paddings, gaps, alinhamentos, grid compliance |
-| **Tipografia** | Font family, size, weight, line-height, letter-spacing, truncation |
-| **Cores** | Background, text, borders, estados (hover, active, disabled, focus) |
-| **Componentes** | Variantes corretas, props aplicadas, estados visuais |
-| **Icones & Imagens** | Tamanho, cor, alinhamento, resolucao, alt text |
-| **Responsive** | Breakpoints, reflow, stacking order, touch targets (min 44x44px) |
-| **Motion** | Timing, easing, transicoes entre estados, loading states |
+### Step 3 — Behavior Testing (Functional Review)
+1. **Estados de componentes**: Default, hover, focus, active, disabled, loading, error
+2. **Transicoes e animacoes**: Duracao, easing, propriedades animadas conforme spec
+3. **Interacoes**: Click, tap, drag, swipe, keyboard navigation funcionando como especificado
+4. **Edge cases de conteudo**: Texto longo (truncation), texto curto, campos vazios, listas longas
+5. **Empty states**: Tela sem dados mostra estado vazio conforme design?
+6. **Error states**: Mensagens de erro aparecem no local e formato corretos?
+7. **Loading states**: Skeletons, spinners, progress bars conforme spec?
+8. **Acessibilidade basica**: Tab order logico, focus visible, labels de screen reader
 
-### Step 3 — Inspecao Funcional de UX
-Alem do visual, valide comportamentos de experiencia:
+### Step 4 — Classificar Bugs por Severity
+Cada discrepancia encontrada recebe uma severity level:
 
-1. **Fluxo completo**: Execute o happy path e verifique cada etapa
-2. **Estados**: Empty state, loading, error, success — todos implementados?
-3. **Edge cases**: Textos longos, listas vazias, conexao lenta, timeout
-4. **Interacoes**: Hover, focus, active, disabled funcionam como especificado?
-5. **Navegacao**: Back button, deep links, breadcrumbs funcionam corretamente?
-6. **Acessibilidade basica**: Tab order, focus visible, contraste, screen reader labels
-
-### Step 4 — Reportar Discrepancias (Bug Reporting)
-Para cada discrepancia encontrada, documente:
-
-1. **Titulo**: Descricao concisa do problema
-2. **Severidade**: S1-S4 (veja classificacao abaixo)
-3. **Dimensao**: Qual aspecto esta incorreto (layout, cor, typography, etc.)
-4. **Onde**: Tela, componente, estado, device/browser
-5. **Esperado**: Screenshot ou link do spec de design
-6. **Atual**: Screenshot da implementacao
-7. **Impacto**: Como afeta o usuario final
-
-Classificacao de severidade:
-
-| Nivel | Descricao | Exemplos | SLA sugerido |
+| Severity | Descricao | Exemplos | SLA de Correcao |
 |---|---|---|---|
-| **S1 — Critico** | Impede uso ou viola requisito legal | Botao de acao invisivel, contraste abaixo de WCAG AA, fluxo bloqueado | Fix antes da release |
-| **S2 — Major** | Prejudica experiencia significativamente | Hierarquia invertida, touch target muito pequeno, estado de erro ausente | Fix no sprint atual |
-| **S3 — Minor** | Discrepancia notavel mas nao impede uso | Spacing 4px off, cor levemente diferente, animacao ausente | Fix no proximo sprint |
-| **S4 — Cosmetic** | Detalhe menor, polish | Arredondamento 2px diferente, sombra sutil ausente | Backlog / nice-to-have |
+| **Critical** | Bloqueia uso ou causa perda de dados | Botao de submit invisivel, form nao envia, crash visual | Antes do release |
+| **Major** | Afeta funcionalidade ou experiencia significativamente | Estado de erro nao aparece, layout quebrado em mobile, contraste inacessivel | Sprint atual |
+| **Minor** | Perceptivel mas nao impede uso | Espacamento 4px off, cor levemente diferente, transicao ausente | Proximo sprint |
+| **Cosmetic** | Detalhe estetico sem impacto funcional | Border-radius 1px off, shadow sutil diferente, font-weight em 1 label | Backlog |
 
-### Step 5 — Priorizar Correcoes
-1. Agrupe bugs por severidade e por tela/fluxo
-2. Identifique padroes: problemas sistemicos (ex.: todos os spacings estao 4px maiores)
-3. Bugs sistematicos devem ser resolvidos na raiz (token, componente base), nao caso a caso
-4. Priorize: S1 > S2 > bugs sistemicos S3 > S3 pontual > S4
-5. Defina com engenharia quais serao fixados antes da release vs. pos-release
-6. Registre decisoes de "aceitar como esta" com racional (nao ignore silenciosamente)
+### Step 5 — Reportar Bugs de Forma Estruturada
+Para cada bug, documente:
+1. **Titulo**: Descricao concisa do problema (ex.: "Button spacing 8px em vez de 12px no checkout mobile")
+2. **Severity**: Critical / Major / Minor / Cosmetic
+3. **Screenshot**: Lado a lado — design spec vs. implementacao real
+4. **Localizacao**: Tela, componente, breakpoint, estado
+5. **Esperado**: O que o design spec define (inclua link para frame no Figma)
+6. **Atual**: O que a implementacao mostra (inclua URL do staging)
+7. **Detalhes tecnicos**: Token esperado, valor CSS encontrado, DevTools evidence
+8. Agrupe bugs por tela ou componente para facilitar resolucao em batch
 
-### Step 6 — Re-review e Sign-off
-1. Apos fixes, re-verifique cada bug reportado como corrigido
-2. Mantenha status atualizado: aberto > em fix > re-review > fechado
-3. Quando todos os S1 e S2 estao fechados: design sign-off para release
-4. Documente S3/S4 aceitos para sprint futuro como design debt
-5. Comunique sign-off (ou bloqueio) formalmente no canal do squad
+### Step 6 — Workflow de Resolucao
+1. Designer abre issues de QA no board do sprint com severity e evidencia
+2. Dev e designer fazem triage conjunta: confirmar, reclassificar ou marcar "by design"
+3. Bugs critical e major sao resolvidos no sprint atual — sem negociacao
+4. Bugs minor sao planejados para proximo sprint
+5. Bugs cosmetic vao para backlog e sao resolvidos em sprints de polimento
+6. Apos correcao, designer faz re-review e fecha a issue
+7. Se a mesma discrepancia aparece repetidamente, eleve para o DS team como melhoria de specs
+
+### Step 7 — Melhorar o Processo Continuamente
+1. Track metricas: bugs por sprint, distribuicao por severity, tempo de resolucao
+2. Bugs recorrentes indicam falha de handoff — melhore specs, tokens ou documentacao
+3. Realize QA review checkpoint no meio do desenvolvimento (nao so no final)
+4. Automatize o que for possivel: visual regression tests (Chromatic, Percy, BackstopJS)
+5. Mantenha checklist vivo: adicione itens novos conforme padroes de bugs emergem
 
 ## Examples
 
 ### Exemplo 1 — QA de Feature de Checkout
-22 bugs reportados: 2 S1 (botao CTA sem contraste acessivel + empty state de carrinho ausente),
-5 S2 (touch targets < 44px em mobile, hierarquia de preco incorreta), 10 S3, 5 S4.
-S1 fixados em 1 dia. S2 fixados no sprint. Release aprovada com 3 S3 aceitos como debt.
+Review de 5 telas de checkout em 3 breakpoints. Encontrados: 2 major (form de pagamento
+sem error state visivel, botao CTA cortado em mobile), 4 minor (espacamento inconsistente
+entre campos, cor de placeholder diferente do token), 3 cosmetic (shadow sutil ausente,
+border-radius 2px off). Major corrigidos na sprint. Minor planejados para sprint seguinte.
+Bug de error state revelou que o spec nao cobria o cenario — spec atualizado para futuros handoffs.
 
-### Exemplo 2 — QA Sistemico pos-Migration de DS
-Apos migracao de DS v2 para v3, QA em 8 telas revelou padrao: todos os spacings de 16px
-viraram 12px por erro no token mapping. Fix unico no token resolveu 34 dos 41 bugs reportados.
-Restantes 7 eram bugs pontuais de implementacao. Sem o QA sistematico, cada bug teria sido
-reportado e fixado individualmente.
+### Exemplo 2 — Auditoria Visual Pos-DS Migration
+Apos migrar de DS v2 para v3, QA review de 12 telas core. 67 discrepancias encontradas.
+Analise revelou que 80% eram do mesmo tipo: tokens de spacing antigos nao mapeados. Criado
+codemod para corrigir em batch. Restantes 13 bugs eram edge cases de componentes com props
+novas. Resolvidos em 2 sprints. Post-mortem gerou melhoria no migration guide do DS.
 
 ## Common Pitfalls
 
-- **QA so no final**: Revisar so antes da release gera pressao para "aceitar como esta"
-- **Tudo e S1**: Inflar severidade destrói priorizacao e credibilidade do design
-- **Screenshots sem contexto**: Bug report sem spec de referencia forca engenharia a adivinhar
-- **Ignorar responsive**: Testar so desktop quando 60%+ do trafego e mobile
-- **QA sem dados reais**: Testar com "Lorem ipsum" nao revela problemas de truncation e layout
-- **Nao fechar o loop**: Reportar bugs sem re-verificar fixes cria backlog fantasma
+- **QA so no final**: Revisar apenas antes do release gera backlog enorme — faca checkpoints intermediarios
+- **Sem screenshots comparativos**: "Esta diferente" sem evidencia visual gera debate improdutivo
+- **Tudo e critical**: Inflar severity desgasta a relacao design-dev e dilui urgencia real
+- **Ignorar edge cases**: Testar so o happy path com dados perfeitos esconde 50% dos problemas
+- **Designer vs. Dev**: QA nao e adversarial — e colaborativo. Triage conjunta evita ressentimento
+- **Nao automatizar**: Visual regression tests capturam regressoes que review manual nao escala
 
 ## Cross-References
 
-- [design-to-code-handoff.md](design-to-code-handoff.md) — Specs como referencia para QA
-- [handoff-layer.md](handoff-layer.md) — Processo de handoff que precede o QA
-- [design-audit-framework.md](design-audit-framework.md) — Audit abrangente vs. QA pontual
-- [accessibility-wcag-aa.md](accessibility-wcag-aa.md) — Criterios de a11y no QA
-- [design-debt-management.md](design-debt-management.md) — Bugs S3/S4 aceitos viram design debt
-- [design-system-governance.md](design-system-governance.md) — DS consistency como dimensao de QA
-- [Design Review Report Template](../templates/reports/design-review-report-template.md) — Template para documentar review
-- [Design Critique Quality Checklist](../checklists/design-critique-quality.md) — Checklist de qualidade
-- [Design Chief](../agents/design-chief.md) — Sign-off authority
-- [Jessica UX/UI](../agents/jessica-ux-ui.md) — Agente para suporte em QA visual
+- [Jessica UX/UI](../agents/jessica-ux-ui.md) — Agente especialista em UI e qualidade visual
+- [Design Chief](../agents/design-chief.md) — Stakeholder para priorizacao de bugs visuais
+- [Handoff Quality Checklist](../checklists/handoff-quality.md) — Checklist de qualidade do handoff design-dev
+- [QA Bug Template](../templates/handoff/qa-bug-template.md) — Template para reportar bugs visuais
+- [design-to-code-handoff.md](design-to-code-handoff.md) — Framework de handoff que precede o QA
+- [design-token-architecture.md](design-token-architecture.md) — Tokens como fonte de verdade para comparacao
+- [component-spec-framework.md](component-spec-framework.md) — Specs de componente como base para QA
+- [design-review-and-critique.md](design-review-and-critique.md) — Review de design complementa QA de implementacao
