@@ -80,15 +80,15 @@ Se um agent nao possui framework associado, o roteador levanta erro antes da exe
 
 | Layer | Descricao | Framework Reference |
 |-------|-----------|---------------------|
-| 1. Discovery | Pesquisa exploratoria, entrevistas, benchmarks | `discovery-brief-framework` |
-| 2. Strategy | Definicao de problema, personas, JTBD | `strategy-canvas-framework` |
-| 3. UX Design | Fluxos, IA, wireframes, prototipos lo-fi | `ux-flow-framework` |
-| 4. UI Design | Visual design, high-fidelity, motion specs | `ui-visual-framework` |
-| 5. Design System | Tokens, componentes, biblioteca, documentacao | `design-system-framework` |
-| 6. Prototyping | Prototipos interativos, testes de usabilidade | `prototyping-test-framework` |
-| 7. Handoff | Entrega para engenharia, specs, assets | `handoff-spec-framework` |
-| 8. QA | Revisao visual, acessibilidade, consistencia | `qa-review-framework` |
-| 9. Governance | Metricas, debt tracking, decisoes arquiteturais | `governance-ops-framework` |
+| 1. Discovery | Pesquisa exploratoria, entrevistas, benchmarks | `frameworks/discovery-layer` |
+| 2. Strategy | Definicao de problema, personas, JTBD | `frameworks/strategy-layer` |
+| 3. UX Design | Fluxos, IA, wireframes, prototipos lo-fi | `frameworks/ux-layer` |
+| 4. UI Design | Visual design, high-fidelity, motion specs | `frameworks/ui-layer` |
+| 5. Design System | Tokens, componentes, biblioteca, documentacao | `frameworks/design-system-layer` |
+| 6. Prototyping | Prototipos interativos, testes de usabilidade | `frameworks/prototyping-layer` |
+| 7. Handoff | Entrega para engenharia, specs, assets | `frameworks/handoff-layer` |
+| 8. QA | Revisao visual, acessibilidade, consistencia | `frameworks/qa-review-framework` |
+| 9. Governance | Metricas, debt tracking, decisoes arquiteturais | `frameworks/governance-layer` |
 
 ---
 
@@ -273,4 +273,225 @@ em `data/metrics/` que alimentam decisoes do proximo ciclo.
 
 ---
 
-*Ultima atualizacao: 2026-03-06*
+## 14. Memory Model & Learning
+
+O squad possui um sistema de memoria operacional em multiplas camadas:
+
+```
+[Execucao de Task]
+        |
+        v
+[data/registries/] --- registro permanente de artefatos, decisoes, insights
+        |
+        v
+[data/metrics/] --- KPIs e metricas quantitativas
+        |
+        v
+[data/learnings/] --- lessons learned e patterns identificados
+        |
+        v
+[data/scorecards/] --- avaliacao periodica de performance
+        |
+        v
+[Kaizen Loop] --- alimenta proximas decisoes e prioridades
+```
+
+### Como o squad aprende:
+
+1. **Post-execution capture** — Toda task concluida gera entrada no registry correspondente.
+2. **Lessons learned** — Quando algo falha ou supera expectativas, registra-se em `data/learnings/learning-log.yaml`.
+3. **Quarterly review** — A cada trimestre, o squad revisa registries + metrics para identificar patterns.
+4. **Kaizen loop** — Insights da review alimentam ajustes em frameworks, checklists e processos.
+5. **Decision traceability** — Toda decisao significativa e registrada em `data/registries/decisions-log.yaml` com contexto, alternativas e racional.
+
+### Principio de memoria:
+
+> Se uma decisao, insight ou aprendizado nao esta registrado, ele nao existe para o sistema.
+> O squad opera com memoria explicita, nunca implicita.
+
+---
+
+## 15. Escalation & Delegation Protocol
+
+### Escalation dentro do squad:
+
+| Trigger | Acao | Responsavel |
+|---------|------|-------------|
+| Agent nao resolve task em 2x tempo estimado | Reavaliacao de escopo ou reassignment | design-chief |
+| Dois agents discordam sobre abordagem | Arbitragem baseada em evidencias | design-chief |
+| Quality gate reprova 3x consecutivas | Sessao de troubleshooting | design-chief + agent + reviewer |
+| Bloqueio por dependencia externa | Comunicacao formal ao squad bloqueador | design-chief |
+
+### Escalation cross-squad:
+
+| Trigger | Acao | Responsavel |
+|---------|------|-------------|
+| Dependencia bloqueia task > 3 dias uteis | Escalar para PM Lead | design-chief |
+| Output recebido nao atende quality gate | Devolver com feedback + sessao de alinhamento | design-chief |
+| Conflito de prioridade entre squads > 5 dias | Escalar para HRM Chief / Central Command | design-chief |
+
+### Delegation:
+
+O design squad delega quando a task sai do seu escopo:
+- **Copy/microcopy extensivo** → Copy Squad
+- **Identidade visual from scratch** → Brand Squad
+- **Analise quantitativa de comportamento** → Traffic Squad
+- **Narrativa de produto / case study** → Storytelling Squad
+- **Implementacao frontend** → NUNCA delega; faz handoff para Engineering
+
+Protocolo completo em `docs/escalation-protocol.md` e `docs/delegation-protocol.md`.
+
+---
+
+## 16. Rework Loop Protocol
+
+Quando um quality gate reprova um entregavel:
+
+```
+[Output do Agent]
+        |
+        v
+[Quality Gate Check]
+        |
+   PASS?--YES--> [Proximo step / Handoff]
+        |
+       NO
+        |
+        v
+[Feedback especifico gerado]
+        |
+        v
+[Retorno ao Agent responsavel]
+        |
+        v
+[Agent corrige com base no feedback]
+        |
+        v
+[Re-submissao ao Quality Gate]
+        |
+   PASS?--YES--> [Proximo step]
+        |
+       NO (3a vez)
+        |
+        v
+[Escalation para design-chief]
+        |
+        v
+[Troubleshooting session]
+```
+
+### Regras do rework loop:
+
+1. **Feedback especifico** — Gate nunca diz apenas "reprovado". Sempre lista itens faltantes e criterios nao atendidos.
+2. **Max 3 iteracoes** — Se falha 3x, escala para design-chief.
+3. **Prazo de correcao** — Agent recebe prazo proporcional a complexidade da correcao.
+4. **Registro** — Toda reprovacao e registrada em `data/registries/` com motivo e resolucao.
+5. **No punishment** — Rework e oportunidade de melhoria, nao punicao.
+
+Protocolo completo em `docs/rework-loop-protocol.md`.
+
+---
+
+## 17. Ambiguity Resolution Protocol
+
+Quando uma task e ambigua ou tem requisitos conflitantes:
+
+| Tipo de Ambiguidade | Resolucao |
+|---------------------|-----------|
+| Escopo nao claro | Agent solicita clarificacao ao design-chief antes de iniciar |
+| Requisitos conflitantes | Design-chief convoca alinhamento com stakeholders |
+| Sem dados para decisao | Agent propoe 2-3 opcoes com trade-offs documentados |
+| Dominio incerto (UX vs UI vs DS) | Design-chief decide routing com base na natureza primaria da task |
+| Task fora do escopo do squad | Design-chief avalia delegation para squad adequado |
+
+### Principio:
+
+> Ambiguidade nao e desculpa para inacao. Quando ha duvida, o agent deve
+> (1) documentar a ambiguidade, (2) propor opcoes, (3) solicitar decisao.
+> Nunca assumir silenciosamente.
+
+---
+
+## 18. HRM Integration
+
+O Design Squad opera como um setor dentro de um sistema HRM (Hierarchical Role Modeling) multi-camadas:
+
+```
++----------------------------------+
+|      HRM Chief / Central Cmd     |  <- Nivel 0: Governanca do sistema
++----------------------------------+
+                |
++----------------------------------+
+|         Squad Chiefs             |  <- Nivel 1: Orquestracao local
+|  (design-chief, copy-chief...)   |
++----------------------------------+
+                |
++----------------------------------+
+|    Functional Teams / Swarms     |  <- Nivel 2: Coordenacao de dominio
+|  (research_team, ui_team, etc.)  |
++----------------------------------+
+                |
++----------------------------------+
+|      Individual Agents           |  <- Nivel 3: Execucao
+|  (jessica-ux-ui, brad-frost...)  |
++----------------------------------+
+```
+
+### Como o squad se conecta ao sistema:
+
+1. **Reporting** — Design-chief reporta metricas e status ao HRM Layer via scorecards trimestrais.
+2. **Escalation** — Conflitos nao resolvidos no nivel do squad sobem para HRM Chief.
+3. **Cross-squad coordination** — Handoffs entre squads seguem contratos formais em `workflows/handoff-contract-*.md`.
+4. **Resource allocation** — HRM Layer pode realocar agents entre squads em caso de sobrecarga.
+5. **Quality standards** — GOLD/SOTA thresholds sao definidos pelo HRM Layer e aplicados localmente.
+
+---
+
+## 19. Quality Gate Cascade
+
+Os quality gates operam em cascata, do mais granular ao mais geral:
+
+```
+[Agent Gate]
+    |
+    v
+[Inter-Agent Transition Gate]
+    |
+    v
+[Domain Gate]
+    |
+    v
+[Mandatory Gate]
+    |
+    v
+[Chief Approval]
+    |
+    v
+[Cross-Squad Handoff Gate]
+    |
+    v
+[HRM Layer Review] (se aplicavel)
+```
+
+### Logica de cada nivel:
+
+| Nivel | Quem aplica | Pode ser overridado? | Consequencia de falha |
+|-------|------------|---------------------|----------------------|
+| Agent Gate | O proprio agent | Sim, pelo reviewer | Rework pelo agent |
+| Inter-Agent Transition | Agent receptor | Sim, pelo design-chief | Retorno ao agent anterior |
+| Domain Gate | Especialista do dominio | Sim, pelo design-chief com justificativa | Rework pelo time do dominio |
+| Mandatory Gate | design-chief | **NAO** | Bloqueio total ate resolucao |
+| Chief Approval | design-chief | Apenas pelo HRM Layer | Rework do squad inteiro se necessario |
+| Cross-Squad Gate | Squad receptor | Nao (devolve ao squad emissor) | Refazer handoff |
+
+### Override rules:
+
+- Gates **mandatory** NUNCA podem ser overridados por ninguem dentro do squad.
+- Gates **per_domain** podem ser overridados pelo design-chief com justificativa documentada em `data/registries/decisions-log.yaml`.
+- Gates **inter_agent** podem ser flexibilizados em contexto de prototipacao rapida, desde que registrado.
+
+Detalhamento completo em `docs/quality-gate-cascade.md`.
+
+---
+
+*Ultima atualizacao: 2026-03-18*

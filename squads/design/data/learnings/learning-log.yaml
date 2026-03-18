@@ -1,0 +1,82 @@
+# Design Squad — Learning Log
+# Registro de aprendizados do squad ao longo do tempo.
+# Alimenta o Kaizen loop e influencia proximas decisoes.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string          # LRN-001
+  - date: date
+  - source: enum        # post-release | retrospective | quality-gate-failure | research | cross-squad
+  - category: enum      # process | quality | tooling | collaboration | research | design-system
+  - title: string
+  - context: string
+  - learning: string    # O que aprendemos
+  - impact: enum        # high | medium | low
+  - action_taken: string
+  - applied_to: list    # Onde o aprendizado foi aplicado
+  - status: enum        # identified | in-progress | applied | archived
+
+entries:
+  - id: "LRN-001"
+    date: "2026-01-20"
+    source: quality-gate-failure
+    category: process
+    title: "Handoff incompleto gera rework de 3 dias"
+    context: >
+      Feature de checkout foi enviada para engineering sem specs de edge cases.
+      Dev team encontrou 12 cenarios nao documentados durante implementacao.
+    learning: >
+      Handoff sem documentacao de edge cases gera rework proporcional a
+      complexidade do fluxo. Edge cases devem ser documentados ANTES do handoff.
+    impact: high
+    action_taken: >
+      Adicionado template de edge-cases ao handoff package obrigatorio.
+      Checklist de handoff atualizado com item de edge cases.
+    applied_to:
+      - checklists/handoff-quality
+      - templates/handoff/edge-cases-documentation-template
+    status: applied
+
+  - id: "LRN-002"
+    date: "2026-02-10"
+    source: research
+    category: research
+    title: "Entrevistas curtas (15min) geram insights mais focados"
+    context: >
+      Teste comparativo entre entrevistas de 15min e 45min para discovery
+      de feature de configuracao de perfil.
+    learning: >
+      Entrevistas de 15min com roteiro focado em 3 topicos produziram
+      insights mais acionaveis que entrevistas longas com roteiro aberto.
+      Participantes mantiveram foco e respostas foram mais concretas.
+    impact: medium
+    action_taken: >
+      Atualizado interview-framework para recomendar sessoes de 15-20min
+      como default, com 45min reservado para discovery exploratoria.
+    applied_to:
+      - frameworks/interview-framework
+      - templates/research/interview-script-template
+    status: applied
+
+  - id: "LRN-003"
+    date: "2026-03-05"
+    source: cross-squad
+    category: collaboration
+    title: "Copy Squad precisa de contexto visual, nao apenas wireframes"
+    context: >
+      Copy Squad recebeu wireframes para criar microcopy de onboarding
+      mas nao tinha contexto sobre o tom emocional desejado para cada tela.
+    learning: >
+      Handoff para Copy Squad deve incluir: wireframe + user state emocional
+      + exemplos de tom + constraints de caracteres. Wireframe sozinho
+      nao fornece contexto suficiente para copy de qualidade.
+    impact: high
+    action_taken: >
+      Atualizado contrato de handoff com Copy Squad.
+      Adicionado campo de contexto emocional ao template de microcopy.
+    applied_to:
+      - workflows/handoff-contract-copy-squad
+      - templates/ui/microcopy-template
+    status: applied

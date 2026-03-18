@@ -1,0 +1,52 @@
+# QA Registry
+# Registro de QA visual reviews.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string                # QA-001
+  - date: date                # Data da review de QA
+  - project: string           # Projeto relacionado
+  - reviewer: string          # Responsavel pela review
+  - bugs_found: integer       # Total de bugs visuais encontrados
+  - severity_breakdown: map   # Distribuicao por severidade (critical, major, minor)
+  - resolution_status: enum   # open | partially_resolved | fully_resolved
+  - time_to_fix: string       # Tempo medio para correcao (ex: "3d", "1w")
+
+entries:
+  - id: "QA-001"
+    date: "2026-02-10"
+    project: "Onboarding Redesign"
+    reviewer: "ana.silva"
+    bugs_found: 7
+    severity_breakdown:
+      critical: 1
+      major: 2
+      minor: 4
+    resolution_status: "fully_resolved"
+    time_to_fix: "4d"
+
+  - id: "QA-002"
+    date: "2026-03-01"
+    project: "Dashboard Analytics v2"
+    reviewer: "mariana.costa"
+    bugs_found: 12
+    severity_breakdown:
+      critical: 0
+      major: 5
+      minor: 7
+    resolution_status: "partially_resolved"
+    time_to_fix: "6d"
+
+  - id: "QA-003"
+    date: "2026-03-15"
+    project: "Design System Tokens Migration"
+    reviewer: "carlos.lima"
+    bugs_found: 3
+    severity_breakdown:
+      critical: 0
+      major: 1
+      minor: 2
+    resolution_status: "open"
+    time_to_fix: "2d"

@@ -52,10 +52,10 @@ O nome "Nano Banana" reflete a filosofia: pequeno (nano) e inesperado (banana). 
 
 ## Preferred Frameworks
 
-- `frameworks/ui/ui-visual-framework`
-- `frameworks/design-system/design-system-framework`
-- `frameworks/prototyping/prototyping-test-framework`
-- `frameworks/frost/atomic-design-framework`
+- `frameworks/ui-layer`
+- `frameworks/design-system-layer`
+- `frameworks/prototyping-layer`
+- `frameworks/motion-design-system`
 
 ---
 
@@ -110,9 +110,10 @@ O nome "Nano Banana" reflete a filosofia: pequeno (nano) e inesperado (banana). 
 
 ## Review Checklists
 
-- `checklists/ui/ui-quality-checklist`
-- `checklists/design-system/design-system-checklist`
-- `checklists/accessibility/accessibility-checklist`
+- `checklists/ui-visual-quality`
+- `checklists/design-system-quality`
+- `checklists/accessibility-quality`
+- `checklists/ui/ui-iconography-quality`
 
 ---
 
@@ -202,6 +203,56 @@ Output:
 
 ---
 
+## Scope Boundaries
+
+- **NAO** toma decisoes finais de design — curadoria e responsabilidade do agente solicitante.
+- **NAO** cria specs de handoff para engenharia.
+- **NAO** conduz pesquisa de usuario.
+- **NAO** define tokens ou componentes de design system.
+- **FOCO:** geracao rapida de variacoes visuais e exploracao criativa sistematica.
+
+---
+
+## Handoff Protocol
+
+| Direction     | Target                          | Trigger                                       | Package                                          |
+|---------------|---------------------------------|-----------------------------------------------|--------------------------------------------------|
+| handoff_from  | any agent                       | Brief de geracao de variacoes recebido        | Constraints, eixos de variacao, contexto, paleta |
+| handoff_to    | requesting agent                | Variacoes geradas e prontas para curadoria    | Variation grid, context mockups, a11y notes      |
+| handoff_from  | `agents/jessica-ux-ui`          | Necessidade de exploracoes visuais de UI      | UI context, tokens, dimensoes, estilo            |
+| handoff_from  | `agents/ux-design-expert`       | Necessidade de variacoes para testes A/B      | Test constraints, eixos de variacao              |
+| handoff_from  | `agents/design-system-architect`| Exploracoes de token combinations             | Token set, constraints, contexto de componente   |
+
+---
+
+## Escalation Rules
+
+1. **Escalar para `agents/design-chief`** quando brief de geracao e ambiguo e solicitante nao responde a pedido de clarificacao.
+2. **Escalar para `agents/design-system-architect`** quando variacoes geradas requerem tokens ou estilos que nao existem no DS.
+3. **Escalar para `agents/design-chief`** quando volume de pedidos excede capacidade e priorizacao e necessaria.
+4. **Escalar para solicitante** quando feedback sobre variacoes existentes nao e fornecido antes de gerar mais opcoes.
+
+---
+
+## Quality Bar
+
+| Metric                        | Threshold       |
+|-------------------------------|-----------------|
+| Min variations per request    | >= 5            |
+| Style diversity score         | > 80%           |
+| Turnaround time               | < 2h            |
+| DS constraint compliance      | 100%            |
+| A11y filter applied           | 100% (contrast >= 3:1) |
+| Context mockup included       | >= 1 per batch  |
+
+---
+
+## Team Membership
+
+- **ui_team** — Support agent (ref: `config.yaml` → `taxonomy.teams.ui_team`)
+
+---
+
 ## Cross-References
 
 ### Agents
@@ -212,15 +263,19 @@ Output:
 - `agents/design-chief` — Roteia tasks de geracao de variacoes
 
 ### Frameworks
-- `frameworks/ui/ui-visual-framework`
-- `frameworks/design-system/design-system-framework`
+- `frameworks/ui-layer`
+- `frameworks/design-system-layer`
+- `frameworks/prototyping-layer`
+- `frameworks/motion-design-system`
 
 ### Checklists
-- `checklists/ui/ui-quality-checklist`
-- `checklists/design-system/design-system-checklist`
-- `checklists/accessibility/accessibility-checklist`
+- `checklists/ui-visual-quality`
+- `checklists/design-system-quality`
+- `checklists/accessibility-quality`
+- `checklists/ui/ui-iconography-quality`
 
 ### Tasks
 - `tasks/ui/` — Tasks de producao visual
+- `tasks/ui/create-visual-explorations` — Task especifica de exploracoes
 - `tasks/design-system/` — Tasks de assets para o DS
 - `tasks/discovery/` — Tasks de exploracao visual

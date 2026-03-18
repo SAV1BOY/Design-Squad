@@ -1,0 +1,49 @@
+# Content Registry
+# Registro de conteudo/microcopy produzido e aprovado.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string            # CNT-001
+  - date: date            # Data de criacao do conteudo
+  - screen: string        # Tela ou contexto onde o copy aparece
+  - copy_text: string     # Texto do microcopy
+  - status: enum          # draft | in_review | approved | deprecated
+  - approved_by: string   # Responsavel pela aprovacao
+  - source_squad: string  # Squad de origem da solicitacao
+  - version: string       # Versao do copy (ex: v1.0)
+
+entries:
+  - id: "CNT-001"
+    date: "2026-01-30"
+    screen: "Onboarding - Step 2 - Profile Setup"
+    copy_text: >
+      Complete seu perfil para personalizar sua experiencia.
+      Leva menos de 2 minutos.
+    status: "approved"
+    approved_by: "julia.santos"
+    source_squad: "squad-growth"
+    version: "v2.0"
+
+  - id: "CNT-002"
+    date: "2026-02-18"
+    screen: "Checkout - Payment Error State"
+    copy_text: >
+      Nao foi possivel processar seu pagamento. Verifique os dados
+      do cartao e tente novamente.
+    status: "approved"
+    approved_by: "julia.santos"
+    source_squad: "squad-payments"
+    version: "v1.1"
+
+  - id: "CNT-003"
+    date: "2026-03-08"
+    screen: "Dashboard - Empty State Analytics"
+    copy_text: >
+      Ainda nao ha dados suficientes para exibir. Volte em alguns dias
+      para visualizar seus primeiros insights.
+    status: "in_review"
+    approved_by: ""
+    source_squad: "squad-analytics"
+    version: "v1.0"

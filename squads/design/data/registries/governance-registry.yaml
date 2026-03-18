@@ -1,0 +1,66 @@
+# Governance Registry
+# Registro de decisoes de governanca, reviews e debt tracking.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string            # GOV-001
+  - date: date            # Data do evento de governanca
+  - type: enum            # critique | review | debt
+  - title: string         # Titulo descritivo
+  - participants: list    # Participantes envolvidos
+  - decisions: list       # Decisoes tomadas
+  - action_items: list    # Itens de acao resultantes
+  - status: enum          # scheduled | completed | follow_up_needed | cancelled
+
+entries:
+  - id: "GOV-001"
+    date: "2026-01-22"
+    type: "critique"
+    title: "Design Critique - Onboarding Flow v2"
+    participants:
+      - "mariana.costa"
+      - "ana.silva"
+      - "carlos.lima"
+      - "rafael.mendes"
+    decisions:
+      - "Simplificar step 3 removendo campos opcionais"
+      - "Adicionar progress indicator visual no topo"
+    action_items:
+      - "mariana.costa: Atualizar prototype ate 2026-01-29"
+      - "carlos.lima: Validar tokens de spacing no novo layout"
+    status: "completed"
+
+  - id: "GOV-002"
+    date: "2026-02-15"
+    type: "debt"
+    title: "Design Debt Review - Q1 2026"
+    participants:
+      - "ana.silva"
+      - "carlos.lima"
+      - "julia.santos"
+    decisions:
+      - "Priorizar migracao de 12 componentes legados para o novo design system"
+      - "Agendar sprint dedicada para resolver inconsistencias de tipografia"
+    action_items:
+      - "ana.silva: Criar backlog priorizado de componentes ate 2026-02-22"
+      - "carlos.lima: Auditar tokens de tipografia em uso ate 2026-02-20"
+      - "julia.santos: Revisar copy de componentes legados ate 2026-02-25"
+    status: "follow_up_needed"
+
+  - id: "GOV-003"
+    date: "2026-03-10"
+    type: "review"
+    title: "Design Review - Dashboard Analytics v2 Wireframes"
+    participants:
+      - "rafael.mendes"
+      - "mariana.costa"
+      - "ana.silva"
+    decisions:
+      - "Aprovar layout principal com ajustes na hierarquia de cards"
+      - "Solicitar data visualization review com squad-analytics"
+    action_items:
+      - "rafael.mendes: Aplicar feedback e gerar mockup high-fidelity ate 2026-03-17"
+      - "mariana.costa: Agendar sessao com squad-analytics ate 2026-03-14"
+    status: "completed"

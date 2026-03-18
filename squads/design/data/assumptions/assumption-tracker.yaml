@@ -1,0 +1,65 @@
+# Design Squad — Assumption Tracker
+# Registro de hipoteses e premissas que fundamentam decisoes de design.
+# Rastreia quais foram validadas, invalidadas ou ainda aguardam validacao.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string          # ASM-001
+  - date_created: date
+  - project: string
+  - assumption: string
+  - basis: string       # De onde veio (stakeholder, data, intuition)
+  - risk_if_wrong: enum # high | medium | low
+  - validation_method: string
+  - status: enum        # untested | testing | validated | invalidated | partially_validated
+  - evidence: string
+  - date_resolved: date
+  - impact: string      # O que mudou baseado na validacao
+
+entries:
+  - id: "ASM-001"
+    date_created: "2026-01-10"
+    project: "Onboarding Redesign"
+    assumption: "Usuarios abandonam onboarding porque sao muitos steps"
+    basis: "Stakeholder feedback + analytics (60% drop-off)"
+    risk_if_wrong: high
+    validation_method: "Testes de usabilidade com 8 participantes + A/B test"
+    status: partially_validated
+    evidence: >
+      Teste mostrou que o problema nao e quantidade de steps, mas falta
+      de contexto sobre o valor de cada step. Usuarios aceitam 5 steps
+      se entendem por que estao preenchendo cada campo.
+    date_resolved: "2026-02-05"
+    impact: >
+      Redesign focou em adicionar context e progress indicators em vez
+      de reduzir steps. Proposta de 5 steps com value propositions por step.
+
+  - id: "ASM-002"
+    date_created: "2026-02-01"
+    project: "Design System v2"
+    assumption: "Devs preferem copiar codigo de Storybook a usar o pacote npm"
+    basis: "Conversa informal com 2 devs"
+    risk_if_wrong: medium
+    validation_method: "Survey com 15 devs + analytics de uso do Storybook vs npm"
+    status: validated
+    evidence: >
+      Survey confirmou: 73% dos devs copiam codigo do Storybook.
+      Motivo: npm package tem breaking changes frequentes e versioning confuso.
+    date_resolved: "2026-02-20"
+    impact: >
+      Prioridade de estabilizacao do npm package elevada.
+      Adicionado semver estrito e changelog automatico.
+
+  - id: "ASM-003"
+    date_created: "2026-03-01"
+    project: "Mobile App Redesign"
+    assumption: "Usuarios mobile preferem bottom navigation a hamburger menu"
+    basis: "UX research literature + competitive audit"
+    risk_if_wrong: medium
+    validation_method: "Prototype testing com 6 usuarios mobile"
+    status: testing
+    evidence: null
+    date_resolved: null
+    impact: null

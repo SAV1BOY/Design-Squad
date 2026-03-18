@@ -1,0 +1,47 @@
+# Handoff Registry
+# Registro de handoffs entre design e engineering.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string                # HND-001
+  - date: date                # Data do handoff
+  - project: string           # Projeto relacionado
+  - designer: string          # Designer responsavel
+  - dev_team: string          # Time de desenvolvimento receptor
+  - status: enum              # scheduled | in_progress | completed | blocked
+  - completeness_score: float # Score de completude do handoff (0.0 a 10.0)
+  - qa_status: enum           # pending | in_review | passed | failed
+  - issues_found: integer     # Numero de issues encontradas pos-handoff
+
+entries:
+  - id: "HND-001"
+    date: "2026-02-03"
+    project: "Onboarding Redesign"
+    designer: "mariana.costa"
+    dev_team: "squad-growth"
+    status: "completed"
+    completeness_score: 9.2
+    qa_status: "passed"
+    issues_found: 2
+
+  - id: "HND-002"
+    date: "2026-02-28"
+    project: "Design System Tokens Migration"
+    designer: "carlos.lima"
+    dev_team: "squad-platform"
+    status: "in_progress"
+    completeness_score: 7.5
+    qa_status: "in_review"
+    issues_found: 5
+
+  - id: "HND-003"
+    date: "2026-03-12"
+    project: "Mobile Checkout Simplification"
+    designer: "ana.silva"
+    dev_team: "squad-payments"
+    status: "scheduled"
+    completeness_score: 0.0
+    qa_status: "pending"
+    issues_found: 0

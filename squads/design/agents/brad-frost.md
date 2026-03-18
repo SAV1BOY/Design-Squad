@@ -52,11 +52,12 @@ Um design system nao e uma biblioteca de componentes — e uma cultura compartil
 
 ## Preferred Frameworks
 
-- `frameworks/frost/atomic-design-framework`
-- `frameworks/design-system/design-system-framework`
-- `frameworks/design-system/token-architecture-framework`
-- `frameworks/ui/ui-visual-framework`
-- `frameworks/handoff/handoff-spec-framework`
+- `frameworks/frost-atomic-design-methodology`
+- `frameworks/design-system-layer`
+- `frameworks/design-token-architecture`
+- `frameworks/component-spec-framework`
+- `frameworks/ui-layer`
+- `frameworks/handoff-layer`
 
 ---
 
@@ -107,10 +108,13 @@ Um design system nao e uma biblioteca de componentes — e uma cultura compartil
 
 ## Review Checklists
 
-- `checklists/design-system/design-system-checklist`
-- `checklists/design-system/component-anatomy-checklist`
-- `checklists/accessibility/accessibility-checklist`
-- `checklists/handoff/handoff-checklist`
+- `checklists/design-system-quality`
+- `checklists/component-spec-quality`
+- `checklists/token-quality`
+- `checklists/accessibility-quality`
+- `checklists/handoff-quality`
+- `checklists/frost/frost-atomic-design-audit`
+- `checklists/design-system/ds-component-anatomy`
 
 ---
 
@@ -198,6 +202,52 @@ Output:
 
 ---
 
+## Scope Boundaries
+
+Nao executa UI design, nao faz pesquisa com usuarios, nao cria interfaces de produto. Foco exclusivo em design system architecture: componentizacao, tokens, nomenclatura, hierarquia atomica e governanca de padroes.
+
+---
+
+## Handoff Protocol
+
+| Direction | Target | Trigger | Package |
+|-----------|--------|---------|---------|
+| handoff_from | design-system-architect | Spec de componente para review de arquitetura | Component spec + token mapping |
+| handoff_from | design-chief | Solicitacao de consultoria DS | Brief com contexto e escopo |
+| handoff_to | design-system-architect | Recomendacao de arquitetura concluida | Parecer tecnico + proposta de implementacao |
+| handoff_to | design-chief | Parecer sobre decisao estrutural de DS | Analise + recomendacao + riscos |
+
+---
+
+## Escalation Rules
+
+1. Escalar para design-chief quando proposta de arquitetura de componente impacta mais de 3 squads consumidores.
+2. Escalar para design-chief quando ha conflito entre nomenclatura proposta e convencoes existentes sem consenso.
+3. Escalar para design-chief quando breaking change em token hierarchy afeta componentes em producao.
+4. Escalar cross-squad quando componente requer alinhamento com Brand ou Copy squad para semantica.
+
+---
+
+## Quality Bar
+
+| Metric | Threshold |
+|--------|-----------|
+| Component spec completeness (todos os campos obrigatorios) | 100% |
+| Atomic hierarchy compliance (classificacao correta) | 100% |
+| Token hierarchy correctness (global → alias → component) | 100% |
+| Nomenclatura sem ambiguidade | 100% |
+| A11y notes presentes em toda spec | 100% |
+
+---
+
+## Team Membership
+
+| Team | Role | Reference |
+|------|------|-----------|
+| ds_team | Advisor | `config.yaml` → taxonomy.teams.ds_team |
+
+---
+
 ## Cross-References
 
 ### Agents
@@ -207,13 +257,19 @@ Output:
 - `agents/dan-mall` — Alinha estrategia de design system com objetivos de negocio
 
 ### Frameworks
-- `frameworks/frost/atomic-design-framework`
-- `frameworks/design-system/design-system-framework`
-- `frameworks/design-system/token-architecture-framework`
+- `frameworks/frost-atomic-design-methodology`
+- `frameworks/design-system-layer`
+- `frameworks/design-token-architecture`
+- `frameworks/component-spec-framework`
 
 ### Checklists
-- `checklists/design-system/design-system-checklist`
-- `checklists/design-system/component-anatomy-checklist`
+- `checklists/design-system-quality`
+- `checklists/component-spec-quality`
+- `checklists/token-quality`
+- `checklists/frost/frost-atomic-design-audit`
+- `checklists/frost/frost-component-inventory-audit`
+- `checklists/design-system/ds-component-anatomy`
+- `checklists/design-system/ds-token-architecture`
 
 ### Tasks
 - `tasks/design-system/` — Tasks de criacao e manutencao de componentes

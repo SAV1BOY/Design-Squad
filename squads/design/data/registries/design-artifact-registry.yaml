@@ -1,0 +1,47 @@
+# Design Artifact Registry
+# Registro de artefatos de design produzidos (wireframes, mockups, prototipos, specs).
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string            # ART-001
+  - date: date            # Data de criacao do artefato
+  - type: enum            # wireframe | mockup | prototype | spec | icon_set | illustration
+  - project: string       # Projeto relacionado
+  - creator: string       # Designer responsavel
+  - status: enum          # draft | in_review | approved | deprecated
+  - version: string       # Versao do artefato (ex: v1.2)
+  - figma_link: string    # Link para o arquivo no Figma
+  - quality_score: float  # Score de qualidade (0.0 a 10.0)
+
+entries:
+  - id: "ART-001"
+    date: "2026-01-25"
+    type: "prototype"
+    project: "Onboarding Redesign"
+    creator: "mariana.costa"
+    status: "approved"
+    version: "v2.1"
+    figma_link: "https://figma.com/file/abc123/onboarding-redesign-v2"
+    quality_score: 8.5
+
+  - id: "ART-002"
+    date: "2026-02-14"
+    type: "wireframe"
+    project: "Dashboard Analytics v2"
+    creator: "rafael.mendes"
+    status: "in_review"
+    version: "v1.0"
+    figma_link: "https://figma.com/file/def456/dashboard-analytics-wireframes"
+    quality_score: 7.2
+
+  - id: "ART-003"
+    date: "2026-03-10"
+    type: "spec"
+    project: "Mobile Checkout Simplification"
+    creator: "carlos.lima"
+    status: "draft"
+    version: "v0.3"
+    figma_link: "https://figma.com/file/ghi789/mobile-checkout-specs"
+    quality_score: 6.8

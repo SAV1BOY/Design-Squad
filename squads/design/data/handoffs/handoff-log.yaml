@@ -1,0 +1,69 @@
+# Design Squad — Handoff Log
+# Registro de handoffs entre Design Squad e outros squads/times.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string          # HND-001
+  - date: date
+  - direction: enum     # outgoing | incoming
+  - counterpart: string # Nome do squad ou time
+  - project: string
+  - package: list       # O que foi entregue
+  - quality_gate_result: enum  # pass | fail | conditional
+  - issues_found: list
+  - resolution: string
+  - sla_met: boolean
+  - status: enum        # pending | delivered | accepted | returned | completed
+
+entries:
+  - id: "HND-001"
+    date: "2026-02-15"
+    direction: outgoing
+    counterpart: "Copy Squad"
+    project: "Onboarding Redesign"
+    package:
+      - "Wireframes de 5 telas de onboarding"
+      - "User flow completo com decision points"
+      - "Contexto emocional por tela"
+      - "Constraints de caracteres por campo"
+    quality_gate_result: pass
+    issues_found: []
+    resolution: "Entregue conforme contrato"
+    sla_met: true
+    status: completed
+
+  - id: "HND-002"
+    date: "2026-02-20"
+    direction: incoming
+    counterpart: "Brand Squad"
+    project: "Brand Refresh 2026"
+    package:
+      - "Nova paleta de cores (12 cores)"
+      - "Tipografia atualizada (2 familias)"
+      - "Iconografia base (48 icones)"
+    quality_gate_result: conditional
+    issues_found:
+      - "3 cores sem contrast ratio documentado"
+      - "Icones sem versao para dark mode"
+    resolution: "Brand Squad enviou contrast ratios em 24h. Dark mode icons adiados para sprint seguinte."
+    sla_met: true
+    status: completed
+
+  - id: "HND-003"
+    date: "2026-03-01"
+    direction: outgoing
+    counterpart: "Engineering"
+    project: "Checkout Flow v2"
+    package:
+      - "UI specs high-fidelity (8 telas)"
+      - "Component specs (4 novos componentes)"
+      - "Token mapping completo"
+      - "Edge cases documentation"
+      - "Assets exportados (SVG + PNG 2x)"
+    quality_gate_result: pass
+    issues_found: []
+    resolution: "Handoff completo, implementacao iniciada"
+    sla_met: true
+    status: completed

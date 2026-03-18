@@ -54,11 +54,13 @@ A maturidade de design de uma organizacao nao se mede pelo talento dos designers
 
 ## Preferred Frameworks
 
-- `frameworks/malouf/designops-maturity-framework`
-- `frameworks/research/research-synthesis-framework`
-- `frameworks/malouf/service-blueprint-framework`
-- `frameworks/product/strategy-canvas-framework`
-- `frameworks/ux/ux-flow-framework`
+- `frameworks/malouf-designops-framework`
+- `frameworks/malouf-research-to-decision`
+- `frameworks/malouf-service-design-framework`
+- `frameworks/malouf-facilitation-framework`
+- `frameworks/malouf-ux-strategy-framework`
+- `frameworks/discovery-layer`
+- `frameworks/governance-layer`
 
 ---
 
@@ -111,10 +113,13 @@ A maturidade de design de uma organizacao nao se mede pelo talento dos designers
 
 ## Review Checklists
 
-- `checklists/research/research-quality-checklist`
-- `checklists/operations/designops-checklist`
-- `checklists/ux/ux-checklist`
-- `checklists/review/design-review-checklist`
+- `checklists/malouf/malouf-designops-maturity-audit`
+- `checklists/malouf/malouf-research-synthesis-standards`
+- `checklists/malouf/malouf-service-blueprint-quality`
+- `checklists/malouf/malouf-facilitation-quality`
+- `checklists/synthesis-quality`
+- `checklists/research-plan-quality`
+- `checklists/design-critique-quality`
 
 ---
 
@@ -197,6 +202,52 @@ Maturidade atual: Nivel 2 (Ad-hoc research). Alvo: Nivel 3 (Integrated research)
 
 ---
 
+## Scope Boundaries
+
+Nao executa visual design, nao cria componentes UI, nao faz handoff para engineering. Foco em gestao, maturidade e operacoes: DesignOps maturity, research synthesis, service design e process improvement.
+
+---
+
+## Handoff Protocol
+
+| Direction | Target | Trigger | Package |
+|-----------|--------|---------|---------|
+| handoff_from | design-chief | Solicitacao de consultoria operacional | Brief com contexto + area de maturidade |
+| handoff_from | ux-design-expert | Research para validacao de synthesis | Raw insights + dados coletados |
+| handoff_to | design-chief | Assessment operacional concluido | Maturity report + action items + metricas |
+| handoff_to | ux-design-expert | Feedback sobre qualidade de synthesis | Review + recomendacoes de melhoria |
+
+---
+
+## Escalation Rules
+
+1. Escalar para design-chief quando assessment de maturidade revela gaps criticos que exigem investimento organizacional.
+2. Escalar para design-chief quando research synthesis indica mudanca de direcao estrategica do squad.
+3. Escalar cross-squad quando service blueprint identifica pontos de falha em squads adjacentes (Copy, Brand, Traffic).
+4. Escalar para design-chief quando metricas operacionais (cycle time, WIP) indicam degradacao sistematica de performance.
+
+---
+
+## Quality Bar
+
+| Metric | Threshold |
+|--------|-----------|
+| Research quality score (completude + rigor de synthesis) | >90% |
+| Ops maturity assessment accuracy (validado por design-chief) | >85% |
+| Process improvement proposals com metricas de sucesso | 100% |
+| Workshop facilitation plans com objetivo + output definidos | 100% |
+
+---
+
+## Team Membership
+
+| Team | Role | Reference |
+|------|------|-----------|
+| governance_team | Advisor | `config.yaml` → taxonomy.teams.governance_team |
+| research_team | Advisor | `config.yaml` → taxonomy.teams.research_team |
+
+---
+
 ## Cross-References
 
 ### Agents
@@ -206,13 +257,21 @@ Maturidade atual: Nivel 2 (Ad-hoc research). Alvo: Nivel 3 (Integrated research)
 - `agents/brad-frost` — Alinha governanca de DS com maturidade operacional
 
 ### Frameworks
-- `frameworks/malouf/designops-maturity-framework`
-- `frameworks/research/research-synthesis-framework`
-- `frameworks/malouf/service-blueprint-framework`
+- `frameworks/malouf-designops-framework`
+- `frameworks/malouf-research-to-decision`
+- `frameworks/malouf-service-design-framework`
+- `frameworks/malouf-facilitation-framework`
+- `frameworks/malouf-design-quality-model`
+- `frameworks/discovery-layer`
+- `frameworks/governance-layer`
 
 ### Checklists
-- `checklists/research/research-quality-checklist`
-- `checklists/operations/designops-checklist`
+- `checklists/malouf/malouf-designops-maturity-audit`
+- `checklists/malouf/malouf-research-synthesis-standards`
+- `checklists/malouf/malouf-service-blueprint-quality`
+- `checklists/malouf/malouf-facilitation-quality`
+- `checklists/synthesis-quality`
+- `checklists/research-plan-quality`
 
 ### Tasks
 - `tasks/operations/` — Tasks de melhoria de processos

@@ -1,0 +1,144 @@
+# Design Squad — Q1 2026 Scorecard
+# Periodo: Janeiro - Marco 2026
+# Primeiro quarter de operacao do squad no formato MMOS.
+
+schema_version: "1.0"
+template: false
+
+scorecard:
+  period: "Q1 2026"
+  evaluated_by: "design-chief"
+  date: "2026-03-18"
+
+  user_experience:
+    task_success_rate:
+      value: "78%"
+      target: ">85%"
+      status: at_risk
+      notes: "Fluxo de onboarding com taxa abaixo do esperado. Redesign em andamento."
+    time_on_task:
+      value: "baseline estabelecido"
+      target: "reduction >10% vs previous quarter"
+      status: on_track
+      notes: "Q1 serve como baseline. Medicoes configuradas via analytics."
+    error_rate:
+      value: "6.2%"
+      target: "<5%"
+      status: at_risk
+      notes: "Erros concentrados no fluxo de pagamento. Fix priorizado para Q2."
+    sus_score:
+      value: "71"
+      target: ">72"
+      status: at_risk
+      notes: "Muito proximo do target. Melhorias de onboarding devem elevar."
+    nps:
+      value: "35"
+      target: ">30"
+      status: on_track
+
+  design_system:
+    component_coverage:
+      value: "65%"
+      target: ">80%"
+      status: below_target
+      notes: "Biblioteca em construcao. Priorizacao de componentes core para Q2."
+    token_adoption_rate:
+      value: "82%"
+      target: ">90%"
+      status: at_risk
+      notes: "Tokens de cor e tipografia adotados. Spacing tokens ainda com hardcoded values."
+    library_version_drift:
+      value: "1 version"
+      target: "<2 versions"
+      status: on_track
+    component_reuse_ratio:
+      value: "58%"
+      target: ">70%"
+      status: below_target
+      notes: "Muitos componentes one-off criados antes do DS estar maduro."
+    documentation_completeness:
+      value: "75%"
+      target: ">90%"
+      status: at_risk
+      notes: "Componentes documentados mas faltam usage guidelines."
+
+  accessibility:
+    wcag_compliance_score:
+      value: "88%"
+      target: ">95%"
+      status: at_risk
+      notes: "Audit completo realizado. Remediation plan em execucao."
+    critical_violations:
+      value: "0"
+      target: "0"
+      status: on_track
+      notes: "Zero violacoes criticas. 3 violacoes graves em remediacao."
+    remediation_time_avg:
+      value: "4.5 days"
+      target: "<3 days"
+      status: below_target
+      notes: "Processo de remediation sendo otimizado para Q2."
+
+  operational:
+    cycle_time_discovery_to_handoff:
+      value: "18 business days"
+      target: "<15 business days"
+      status: at_risk
+      notes: "Gargalo na fase de research. Otimizacao de processo em Q2."
+    design_debt_ratio:
+      value: "25%"
+      target: "<20%"
+      status: below_target
+      notes: "Debt herdado de fase pre-MMOS. Reducao gradual planejada."
+    review_turnaround_time:
+      value: "18h"
+      target: "<24h"
+      status: on_track
+    rework_rate:
+      value: "22%"
+      target: "<15%"
+      status: below_target
+      notes: "Rework alto em handoffs por specs incompletas. Checklist reforçado."
+    squad_throughput:
+      value: "10 tasks/sprint"
+      target: ">12 tasks/sprint"
+      status: at_risk
+      notes: "Squad em fase de setup. Throughput deve estabilizar em Q2."
+
+  quality_gates:
+    mandatory_gate_pass_rate:
+      value: "100%"
+      target: "100%"
+      status: on_track
+    domain_gate_pass_rate:
+      value: "85%"
+      target: ">90%"
+      status: at_risk
+    first_pass_rate:
+      value: "62%"
+      target: ">70%"
+      status: below_target
+      notes: "Falta de familiaridade com checklists. Training planejado."
+
+  overall:
+    level: GOOD
+    summary: >
+      Primeiro quarter de operacao no formato MMOS. Squad estabeleceu fundacoes
+      solidas mas ainda nao atingiu maturidade operacional completa. Design system
+      em construcao, processos sendo calibrados, quality gates funcionando.
+      Principais gaps em cycle time, rework rate e DS coverage.
+    top_wins:
+      - "Zero violacoes criticas de a11y"
+      - "Review turnaround dentro do target"
+      - "NPS acima do target"
+      - "Mandatory gates com 100% pass rate"
+    top_risks:
+      - "Rework rate alto (22%) impactando throughput"
+      - "Design debt ratio acima do aceitavel"
+      - "Cycle time discovery-to-handoff acima do target"
+    improvement_actions:
+      - "Reforcar checklists de handoff para reduzir rework"
+      - "Priorizar component coverage para >80%"
+      - "Implementar parallel research tracks para reduzir cycle time"
+      - "Criar training de quality gates para todo o squad"
+      - "Estabelecer debt reduction sprint mensal"

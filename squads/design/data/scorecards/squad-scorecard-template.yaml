@@ -1,0 +1,118 @@
+# Design Squad — Scorecard Template
+# Template para avaliacao periodica de performance do squad.
+# Preencher a cada quarter ou ao final de ciclos significativos.
+
+schema_version: "1.0"
+template: true
+
+scorecard:
+  period: "[Q1/Q2/Q3/Q4] [YYYY]"
+  evaluated_by: "[design-chief]"
+  date: "[YYYY-MM-DD]"
+
+  # --- User Experience Metrics ---
+  user_experience:
+    task_success_rate:
+      value: null
+      target: ">85%"
+      status: null  # on_track | at_risk | below_target
+    time_on_task:
+      value: null
+      target: "reduction >10% vs previous quarter"
+      status: null
+    error_rate:
+      value: null
+      target: "<5%"
+      status: null
+    sus_score:
+      value: null
+      target: ">72 (above average)"
+      status: null
+    nps:
+      value: null
+      target: ">30"
+      status: null
+
+  # --- Design System Health ---
+  design_system:
+    component_coverage:
+      value: null
+      target: ">80%"
+      status: null
+    token_adoption_rate:
+      value: null
+      target: ">90%"
+      status: null
+    library_version_drift:
+      value: null
+      target: "<2 versions behind"
+      status: null
+    component_reuse_ratio:
+      value: null
+      target: ">70%"
+      status: null
+    documentation_completeness:
+      value: null
+      target: ">90%"
+      status: null
+
+  # --- Accessibility ---
+  accessibility:
+    wcag_compliance_score:
+      value: null
+      target: ">95%"
+      status: null
+    critical_violations:
+      value: null
+      target: "0"
+      status: null
+    remediation_time_avg:
+      value: null
+      target: "<3 days"
+      status: null
+
+  # --- Operational ---
+  operational:
+    cycle_time_discovery_to_handoff:
+      value: null
+      target: "<15 business days"
+      status: null
+    design_debt_ratio:
+      value: null
+      target: "<20%"
+      status: null
+    review_turnaround_time:
+      value: null
+      target: "<24h"
+      status: null
+    rework_rate:
+      value: null
+      target: "<15%"
+      status: null
+    squad_throughput:
+      value: null
+      target: ">12 tasks/sprint"
+      status: null
+
+  # --- Quality Gates ---
+  quality_gates:
+    mandatory_gate_pass_rate:
+      value: null
+      target: "100%"
+      status: null
+    domain_gate_pass_rate:
+      value: null
+      target: ">90%"
+      status: null
+    first_pass_rate:
+      value: null
+      target: ">70%"
+      status: null
+
+  # --- Overall Score ---
+  overall:
+    level: null  # WEAK | FAIR | GOOD | GOLD | SOTA
+    summary: "[Resumo qualitativo do quarter]"
+    top_wins: []
+    top_risks: []
+    improvement_actions: []

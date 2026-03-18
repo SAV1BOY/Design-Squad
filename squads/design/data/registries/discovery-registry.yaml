@@ -1,0 +1,55 @@
+# Discovery Registry
+# Registro de discovery sessions, problem definitions e briefs.
+
+schema_version: "1.0"
+last_updated: "2026-03-18"
+
+fields:
+  - id: string              # DISC-001
+  - date: date              # Data da sessao de discovery
+  - project: string         # Projeto relacionado
+  - problem_statement: string # Definicao do problema
+  - owner: string           # Responsavel pela discovery
+  - status: enum            # draft | in_progress | completed | archived
+  - insights_count: integer # Quantidade de insights gerados
+  - related_research: list  # IDs de pesquisas relacionadas
+
+entries:
+  - id: "DISC-001"
+    date: "2026-01-20"
+    project: "Onboarding Redesign"
+    problem_statement: >
+      Usuarios novos abandonam o fluxo de onboarding no segundo passo,
+      resultando em 62% de drop-off. Precisamos entender as barreiras
+      e redesenhar a experiencia para aumentar a taxa de conclusao.
+    owner: "mariana.costa"
+    status: "completed"
+    insights_count: 14
+    related_research:
+      - "RES-003"
+      - "RES-007"
+
+  - id: "DISC-002"
+    date: "2026-02-10"
+    project: "Dashboard Analytics v2"
+    problem_statement: >
+      Stakeholders reportam que o dashboard atual nao fornece visibilidade
+      suficiente sobre metricas de retencao. Necessario mapear as necessidades
+      de informacao e priorizar visualizacoes.
+    owner: "rafael.mendes"
+    status: "in_progress"
+    insights_count: 8
+    related_research:
+      - "RES-011"
+
+  - id: "DISC-003"
+    date: "2026-03-05"
+    project: "Mobile Checkout Simplification"
+    problem_statement: >
+      A taxa de conversao no checkout mobile esta 23% abaixo do desktop.
+      Discovery focada em identificar pontos de friccao especificos
+      da experiencia mobile.
+    owner: "ana.silva"
+    status: "draft"
+    insights_count: 3
+    related_research: []

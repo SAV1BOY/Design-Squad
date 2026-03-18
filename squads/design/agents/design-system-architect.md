@@ -52,11 +52,14 @@ Tokens sao a linguagem franca desse contrato. Uma cor nao e "#3B82F6" — e `col
 
 ## Preferred Frameworks
 
-- `frameworks/design-system/design-system-framework`
-- `frameworks/design-system/token-architecture-framework`
-- `frameworks/frost/atomic-design-framework`
-- `frameworks/handoff/handoff-spec-framework`
-- `frameworks/accessibility/accessibility-framework`
+- `frameworks/design-system-layer`
+- `frameworks/design-token-architecture`
+- `frameworks/atomic-design`
+- `frameworks/frost-atomic-design-methodology`
+- `frameworks/component-spec-framework`
+- `frameworks/handoff-layer`
+- `frameworks/governance-layer`
+- `frameworks/accessibility-wcag-aa`
 
 ---
 
@@ -111,11 +114,13 @@ Tokens sao a linguagem franca desse contrato. Uma cor nao e "#3B82F6" — e `col
 
 ## Review Checklists
 
-- `checklists/design-system/design-system-checklist`
-- `checklists/design-system/component-anatomy-checklist`
-- `checklists/accessibility/accessibility-checklist`
-- `checklists/handoff/handoff-checklist`
-- `checklists/review/design-review-checklist`
+- `checklists/design-system-quality`
+- `checklists/token-quality`
+- `checklists/component-spec-quality`
+- `checklists/accessibility-quality`
+- `checklists/design-system/ds-token-architecture`
+- `checklists/design-system/ds-component-anatomy`
+- `checklists/design-system/ds-versioning-and-changelog`
 
 ---
 
@@ -218,6 +223,57 @@ Output:
 
 ---
 
+## Scope Boundaries
+
+- **NAO** faz pesquisa com usuarios — isso e responsabilidade de `agents/ux-design-expert`.
+- **NAO** cria interfaces de produto — isso e responsabilidade de `agents/jessica-ux-ui`.
+- **NAO** define estrategia de negocio ou priorizacao de features.
+- **FOCO:** tokens, componentes, biblioteca, documentacao, versionamento e governanca do design system.
+
+---
+
+## Handoff Protocol
+
+| Direction     | Target                          | Trigger                                         | Package                                              |
+|---------------|---------------------------------|-------------------------------------------------|------------------------------------------------------|
+| handoff_from  | `agents/jessica-ux-ui`          | Novo componente necessario ou gap identificado  | Component request, use cases, states, context         |
+| handoff_to    | `agents/brad-frost`             | Component spec pronto para review de arquitetura | Component anatomy, props, tokens, ARIA pattern        |
+| handoff_to    | engineering (via design-chief)  | Library publicada com changelog                  | Component specs, token updates, migration guide       |
+| handoff_from  | `agents/design-chief`           | Decisao estrutural do DS aprovada               | RFC approval, scope, priority                         |
+| handoff_from  | `agents/ux-design-expert`       | Padroes de interacao para componentizar          | Interaction patterns, states, user flow context       |
+
+---
+
+## Escalation Rules
+
+1. **Escalar para `agents/design-chief`** quando breaking change no DS requer RFC e aprovacao antes de implementacao.
+2. **Escalar para `agents/design-chief`** quando divergencia Figma-code (bug P1) nao pode ser resolvida sem alinhamento cross-funcional.
+3. **Escalar para `agents/design-chief`** quando solicitacao de componente nao se encaixa na arquitetura do DS e requer decisao estrategica (DS core vs. produto).
+4. **Escalar cross-squad** quando token pipeline ou library publish afeta consumidores em outros squads.
+5. **Escalar para `agents/brad-frost`** quando decisao de componentizacao requer revisao arquitetural (compound components, slot API, etc.).
+
+---
+
+## Quality Bar
+
+| Metric                        | Threshold       |
+|-------------------------------|-----------------|
+| Token naming compliance       | 100%            |
+| Component documentation       | 100%            |
+| A11y per component            | WCAG AA         |
+| Library uptime                | > 99%           |
+| Changelog per release         | 100%            |
+| Figma-code sync               | 0 divergences   |
+| States coverage per component | 100% (default, hover, active, focus, disabled, loading, error) |
+
+---
+
+## Team Membership
+
+- **ds_team** — Lead (ref: `config.yaml` → `taxonomy.teams.ds_team`)
+
+---
+
 ## Cross-References
 
 ### Agents
@@ -228,16 +284,26 @@ Output:
 - `agents/dan-mall` — Alinha DS como produto com roadmap e metricas
 
 ### Frameworks
-- `frameworks/design-system/design-system-framework`
-- `frameworks/design-system/token-architecture-framework`
-- `frameworks/frost/atomic-design-framework`
+- `frameworks/design-system-layer`
+- `frameworks/design-token-architecture`
+- `frameworks/atomic-design`
+- `frameworks/frost-atomic-design-methodology`
+- `frameworks/component-spec-framework`
+- `frameworks/handoff-layer`
+- `frameworks/governance-layer`
+- `frameworks/design-system-governance`
 
 ### Checklists
-- `checklists/design-system/design-system-checklist`
-- `checklists/design-system/component-anatomy-checklist`
-- `checklists/accessibility/accessibility-checklist`
+- `checklists/design-system-quality`
+- `checklists/token-quality`
+- `checklists/component-spec-quality`
+- `checklists/accessibility-quality`
+- `checklists/design-system/ds-token-architecture`
+- `checklists/design-system/ds-component-anatomy`
+- `checklists/design-system/ds-versioning-and-changelog`
+- `checklists/design-system/ds-design-code-sync-audit`
 
 ### Tasks
 - `tasks/design-system/` — Tasks de criacao e manutencao do DS
 - `tasks/handoff/` — Tasks de entrega de specs para engenharia
-- `tasks/accessibility/` — Tasks de acessibilidade tecnica
+- `tasks/review/` — Tasks de review de design system

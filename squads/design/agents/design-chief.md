@@ -52,11 +52,12 @@ A governanca de design existe para servir o usuario, nao para burocratizar o pro
 
 ## Preferred Frameworks
 
-- `frameworks/product/strategy-canvas-framework`
-- `frameworks/ux/ux-flow-framework`
-- `frameworks/design-system/design-system-framework`
-- `frameworks/handoff/handoff-spec-framework`
-- `frameworks/prototyping/prototyping-test-framework`
+- `frameworks/strategy-layer`
+- `frameworks/ux-layer`
+- `frameworks/design-system-layer`
+- `frameworks/handoff-layer`
+- `frameworks/prototyping-layer`
+- `frameworks/governance-layer`
 
 ---
 
@@ -111,11 +112,12 @@ A governanca de design existe para servir o usuario, nao para burocratizar o pro
 
 ## Review Checklists
 
-- `checklists/review/design-review-checklist`
-- `checklists/handoff/handoff-checklist`
-- `checklists/accessibility/accessibility-checklist`
-- `checklists/design-system/design-system-checklist`
-- `checklists/ux/ux-checklist`
+- `checklists/design-critique-quality`
+- `checklists/handoff-quality`
+- `checklists/accessibility-quality`
+- `checklists/design-system-quality`
+- `checklists/wireframe-quality`
+- `checklists/ui-visual-quality`
 
 ---
 
@@ -187,6 +189,59 @@ Fluxo completo (8 telas) fica para sprint seguinte.
 
 ---
 
+## Scope Boundaries
+
+Nao executa design (wireframes, mockups, specs, prototipos). Nao faz pesquisa direta com usuarios. Nao implementa tokens ou componentes. Atuacao restrita a orquestracao, governanca, routing e aprovacoes.
+
+---
+
+## Handoff Protocol
+
+| Direction | Target | Trigger | Package |
+|-----------|--------|---------|---------|
+| handoff_from | brad-frost | Recomendacao de arquitetura DS concluida | Parecer tecnico + proposta de implementacao |
+| handoff_from | dan-mall | Recomendacao estrategica concluida | Strategy brief + priorizacao |
+| handoff_from | dave-malouf | Assessment operacional concluido | Maturity report + action items |
+| handoff_from | ux-design-expert | Entregavel UX para review | Artefato + checklist preenchido |
+| handoff_from | jessica-ux-ui | Entregavel UI para review | Artefato + checklist preenchido |
+| handoff_from | design-system-architect | Entregavel DS para review | Spec + tokens + checklist |
+| handoff_from | nano-banana-generator | Variacoes geradas para selecao | Pack de variacoes + criterios |
+| handoff_to | HRM Layer | Escalacao cross-squad ou bloqueio nao resolvivel | Contexto + tentativas + decisao necessaria |
+
+---
+
+## Escalation Rules
+
+1. Escalar para HRM Layer quando conflito entre agents nao e resolvido apos apresentacao de evidencias por ambas as partes.
+2. Escalar para HRM Layer quando dependencia de outro squad (Copy, Brand, Traffic) esta bloqueada ha mais de 48h sem resposta.
+3. Escalar para HRM Layer quando stakeholder solicita mudanca que contradiz pesquisa de usuario E nao aceita alternativa proposta.
+4. Escalar para HRM Layer quando prazo e escopo sao incompativeis e renegociacao com stakeholders falha.
+5. Escalar para HRM Layer quando quality gate reprova entregavel pela terceira vez consecutiva no mesmo item.
+
+---
+
+## Quality Bar
+
+| Metric | Threshold |
+|--------|-----------|
+| Routing accuracy (task para agent correto) | >95% |
+| Review turnaround time | <24h |
+| Missed mandatory quality gates | 0 |
+| Trade-off decisions documentadas | 100% |
+| Sprint backlog completeness | >90% |
+| Stakeholder status report on-time rate | 100% |
+
+---
+
+## Team Membership
+
+| Team | Role | Reference |
+|------|------|-----------|
+| governance_team | Lead | `config.yaml` → taxonomy.teams.governance_team |
+| Oversight: research_team, ux_team, ui_team, ds_team | Overseer | `config.yaml` → taxonomy.teams |
+
+---
+
 ## Cross-References
 
 ### Agents
@@ -199,14 +254,19 @@ Fluxo completo (8 telas) fica para sprint seguinte.
 - `agents/nano-banana-generator` — Gerador de variacoes rapidas
 
 ### Frameworks
-- `frameworks/product/strategy-canvas-framework`
-- `frameworks/ux/ux-flow-framework`
-- `frameworks/design-system/design-system-framework`
+- `frameworks/strategy-layer`
+- `frameworks/ux-layer`
+- `frameworks/ui-layer`
+- `frameworks/design-system-layer`
+- `frameworks/handoff-layer`
+- `frameworks/governance-layer`
+- `frameworks/design-review-and-critique`
 
 ### Checklists
-- `checklists/review/design-review-checklist`
-- `checklists/handoff/handoff-checklist`
-- `checklists/accessibility/accessibility-checklist`
+- `checklists/design-critique-quality`
+- `checklists/handoff-quality`
+- `checklists/accessibility-quality`
+- `checklists/design-system-quality`
 
 ### Tasks
 - `tasks/review/` — Tasks de revisao e aprovacao
